@@ -13,6 +13,11 @@
   align-self: center;
 }
 
+.profile-info__add-button:hover {
+  opacity: 60%;
+  transition: 2s;
+}
+
 @media screen and (min-width: 621px) {
   .profile-info__add-button {
     margin: 0;
@@ -21,9 +26,4 @@
     background-position: right;
     justify-self: end;
   }
-}
-
-.profile-info__add-button:hover {
-  opacity: 60%;
-  transition: 2s;
 }

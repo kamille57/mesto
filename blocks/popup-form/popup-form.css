@@ -1,14 +1,15 @@
 .popup-form {
-  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   border-radius: 10px;
   max-width: 430px;
-  min-height: 251px;
-  max-height: 330px;
+  background-color: #FFF;
   margin: auto;
   padding: 34px 36px 37px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 620px) {
   .popup-form {
     max-width: 238px;
     padding: 25px 22px;

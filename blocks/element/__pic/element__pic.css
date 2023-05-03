@@ -3,4 +3,5 @@
   padding: 0;
   max-height: 282px;
   grid-area: pic;
+  object-fit: cover;
 }

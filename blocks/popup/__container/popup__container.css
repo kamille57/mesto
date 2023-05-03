@@ -1,6 +1,5 @@
-.popup-container {
+.popup__container {
   margin: auto;
-  padding: 0;
   position: relative;
   min-width: 210px;
   max-width: 430px;

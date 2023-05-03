@@ -1,7 +1,7 @@
 .element__like {
   margin-right: 30px;
+  margin-bottom: 30px;
   padding: 0;
-  background-repeat: no-repeat;
   justify-self: end;
   align-self: center;
   grid-area: like;
@@ -9,8 +9,10 @@
   min-height: 19px;
   background-image: url(../../../images/Like.svg);
   background-size: cover;
-  border: 0;
+  background-repeat: no-repeat;
+  background-position: top;
   background-color: #FFF;
+  border: 0;
   cursor: pointer;
   opacity: 1;
 }
@@ -20,6 +22,6 @@
 }
 
 .element__like:active {
-  background-image: url(../../../mesto/images/LikeActive.svg);
+  background-image: url(../../../images/LikeActive.svg);
   opacity: 1;
 }
