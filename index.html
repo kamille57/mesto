@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Страница про путешествия">
+    <meta name="keywords" content="Профиль путешественника, путешествияб фотографии мест">
+    <meta name="author" content="kamille_57">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../mesto/vendor/normalize.css">
+    <link rel="stylesheet" href="../mesto/style.css">
+    <link rel="stylesheet" href="../mesto/Inter/fonts.css">
+    <title>Страница путешественника</title>
+  </head>
+  <body class="page">
+    <header class="header">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <div class="profile-info">
+          <img class="profile-info__avatar" src="images/avatar.jpg" alt="Ваш аватар.">
+          <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+          <button class="profile-info__edit-button"></button>
+          <p class="profile-info__profession">Исследователь океана</p>
+          <button class="profile-info__add-button"></button>
+        </div>
+      </section>
+        <article class="popup">
+          <div class="popup-container">
+            <img class="popup__closed" src="images/Close Icon.svg">
+              <form class="popup-form" method="post" action="#"> 
+                <h2 class="popup-form__heading">Редактировать профиль</h2>
+                <input  class="popup-item popup-item_name" type="text" name="name" placeholder="Жак-Ив Кусто" id="name" required>
+                <input  class="popup-item popup-item_hobby" type="text" name="hobby" placeholder="Исследователь океана" id="hobby" required>
+                <button type="submit" class="popup-form__save-button">Сохранить</button>
+              </form>
+          </div>
+        </article>
+      <section class="elements"> 
+        <article class="element">
+          <img class="element__pic" src="images/Karachaevsk.jpg" alt="Фото Сентинского храма.">
+          <h3 class="element__text">Карачевск</h3>
+          <button type="button" class="element__like"></button>
+        </article>
+        <article class="element">
+          <img class="element__pic" src="images/Elbrus.jpg" alt="Гора Эльбрус. Пейзаж.">
+          <h3 class="element__text">Гора Эльбрус</h3>
+          <button type="button" class="element__like"></button>
+        </article>
+        <article class="element">
+          <img class="element__pic" src="images/Dombai.jpg" alt="Гора Домбай в дымке. Пейзаж.">
+          <h3 class="element__text">Домбай</h3>
+          <button type="button" class="element__like"></button>
+        </article>
+        <article class="element">
+          <img class="element__pic" src="images/Elbrus.jpg" alt="Гора Эльбрус. Пейзаж.">
+          <h3 class="element__text">Гора Эльбрус</h3>
+          <button type="button" class="element__like"></button>
+        </article>
+        <article class="element">
+          <img class="element__pic" src="images/Dombai.jpg" alt="Гора Домбай в дымке. Пейзаж.">
+          <h3 class="element__text">Домбай</h3>
+          <button type="button" class="element__like"></button>
+        </article>
+        <article class="element">
+          <img class="element__pic" src="images/Karachaevsk.jpg" alt="Фото Сентинского храма.">
+          <h3 class="element__text">Карачаево-Черкессия</h3>
+          <button type="button" class="element__like"></button>
+        </article>
+      </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright"> &copy; 2020 Mesto Russia</p>
+    </footer>
+    <script src="../mesto/scripts/script.js"></script> 
+  </body>
+</html>
