@@ -2,10 +2,10 @@ let popup = document.querySelector('.popup');
 let buttonPopupOpen = document.querySelector('.profile-info__edit-button');
 let buttonPopupClose = document.querySelector('.popup__closed');
 let buttonSaveData = document.querySelector('.popup-form__save-button');
+let togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
 
-buttonPopupClose.addEventListener('click', () => {
-popup.classList.remove('popup_opened');
-});
+
+buttonPopupClose.addEventListener('click', () => togglePopupState(popup));
 
 let popupForm = document.querySelector('.popup-form');
 let popupName = document.querySelector('.popup-item_name');
@@ -14,7 +14,7 @@ let profileName = document.querySelector('.profile-info__name');
 let profileHobby = document.querySelector('.profile-info__profession');
 
 buttonPopupOpen.addEventListener('click', () => {
-    popup.classList.add('popup_opened');
+    togglePopupState(popup);
     popupName.value = profileName.textContent; 
     popupHobby.value = profileHobby.textContent;
 });
@@ -24,7 +24,7 @@ function fillForm(evt) {
     evt.preventDefault();
     profileName.textContent = popupName.value;
     profileHobby.textContent = popupHobby.value; 
-    popup.classList.remove('popup_opened');
+    togglePopupState(popup);
 }
 
 

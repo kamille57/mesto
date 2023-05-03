@@ -23,5 +23,5 @@
   font-family: 'Inter-Medium';
   src: local('Inter-Medium'),
   url("Inter-Medium.woff2?v=3.19") format("woff2"),
-       url("Inter-Medium.woff?v=3.19") format("woff");
+  url("Inter-Medium.woff?v=3.19") format("woff");
 }
