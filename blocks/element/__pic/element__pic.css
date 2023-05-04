@@ -1,7 +1,8 @@
 .element__pic {
   margin: 0;
   padding: 0;
-  max-height: 282px;
+  width: 282px;
+  height: 282px;
   grid-area: pic;
   object-fit: cover;
 }
