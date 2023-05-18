@@ -1,6 +1,6 @@
 .element__text {
-  margin: 0 0 32px;
-  padding-left: 21px;
+  margin: 25px auto 32px 21px;
+  padding: 0;
   font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
   line-height: 29px;
   font-size: 24px;
@@ -10,6 +10,5 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 192px;
-  grid-area: place;
   justify-self: start;
 }

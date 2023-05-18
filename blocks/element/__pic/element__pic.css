@@ -1,8 +1,10 @@
 .element__pic {
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 282px;
   height: 282px;
-  grid-area: pic;
   object-fit: cover;
 }

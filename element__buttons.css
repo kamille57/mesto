@@ -1,0 +1,8 @@
+.element__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    grid-column: 1;
+    grid-row: 1;
+}

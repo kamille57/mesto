@@ -18,10 +18,14 @@
 @import url(../blocks/popup-form/__heading/popup-form__heading.css);
 @import url(../blocks/popup-form/__save-button/popup-form__save-button.css);
 @import url(../blocks/popup/__item/popup__item.css);
-@import url(../blocks/elements/elements.css);
+@import url(../blocks/elements-container/elements-container.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__pic/element__pic.css);
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__text/element__text.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+@import url(../element__trash.css);
+@import url(../element__buttons.css);
+@import url(../element__figure.css);

@@ -1,16 +1,11 @@
 .element__like {
-  margin-right: 30px;
-  margin-bottom: 30px;
+  margin: auto 20px 37px auto;
   padding: 0;
-  justify-self: end;
-  align-self: center;
-  grid-area: like;
   min-width: 22px;
   min-height: 19px;
   background-image: url(../../../images/Like.svg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top;
   background-color: #FFF;
   border: 0;
   cursor: pointer;
@@ -21,7 +16,7 @@
   opacity: 50%;
 }
 
-.element__like:active {
+.element__like_active {
   background-image: url(../../../images/LikeActive.svg);
   opacity: 1;
 }
