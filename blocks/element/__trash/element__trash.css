@@ -1,19 +1,15 @@
-.element__figure {
-    margin: 0;
-    padding: 0;
-    display: grid;
-}
-
 .element__trash {
+    margin: 20px 20px auto auto;
     padding: 0;
-    background-image: url(../mesto/images/Trash.svg);
-    max-width: 19px;
-    max-height: 19px;
+    background-image: url(../../../images/Trash.svg);
+    width: 19px;
+    height: 19px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
     background-color: transparent;
-    border: 0;
     cursor: pointer;
     opacity: 1;
+    border: 0;
+    z-index: 1;
 }

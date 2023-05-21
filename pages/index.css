@@ -25,7 +25,7 @@
 @import url(../blocks/element/__text/element__text.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-
-@import url(../element__trash.css);
-@import url(../element__buttons.css);
-@import url(../element__figure.css);
+@import url(../blocks/element/__trash/element__trash.css);
+@import url(../blocks/popup/__pic/popup__pic.css);
+@import url(../blocks/popup/__text/popup__text.css);
+@import url(../blocks/popup/__figure/popup__figure.css);

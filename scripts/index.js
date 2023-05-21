@@ -1,18 +1,24 @@
-let popupEdit = document.querySelector('.popup_edit');
-let popupAdd = document.querySelector('.popup_add');
-let buttonPopupOpen = document.querySelector('.profile-info__edit-button');
-let buttonCloseEdit = document.getElementById('editClose');
-let buttonCloseAdd = document.getElementById('addClose');
-let popupFormEdit = document.getElementById('popupEdit');
-let popupFormAdd = document.getElementById('popupAdd');
-let popupName = document.getElementById('name');
-let popupHobby = document.getElementById('hobby');
-let profileName = document.querySelector('.profile-info__name');
-let profileHobby = document.querySelector('.profile-info__profession');
-let togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
-let addImageOpen = document.querySelector('.profile-info__add-button');
-const elementsContainer = document.querySelector('.elements');
-const figureTemplate = document.querySelector('#elements').content;
+const popupEdit = document.querySelector('.popup_type_profile-edit');
+const popupAdd = document.querySelector('.popup_type_add-pic');
+const popupImage = document.querySelector('.popup_type_show-pic'); //модификатор попапа изображения
+
+const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
+const addImageOpen = document.querySelector('.profile-info__add-button');
+
+const buttonCloseEdit = document.getElementById('editClose');
+const buttonCloseAdd = document.getElementById('addClose');
+const buttonCardClose = document.getElementById('cardClose');
+
+const popupFormEdit = document.getElementById('popupEdit');
+const popupFormAdd = document.getElementById('popupAdd');
+
+const popupName = document.getElementById('name');
+const popupHobby = document.getElementById('hobby');
+const profileName = document.querySelector('.profile-info__name');
+const profileHobby = document.querySelector('.profile-info__profession');
+
+const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
+
 const initialCards = [
     {
       name: 'Архыз',
@@ -39,26 +45,61 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ]; 
+  
 
-const elementsDescription = initialCards.map(function (item) {
-    return {
-       name: item.name,
-       link: item.link
-    };
-});
+  const cardsContainer = document.querySelector('.elements-container');
+  const cardsTemplate = document.querySelector('#template-cards').content;
+  const cardTemplate = cardsTemplate.querySelector('.element');
+  
 
-function createImage () {
-   elementsDescription.forEach(addFigure);
-}
+const elementPic = document.querySelector('.element__pic'); //картинка из темплэйта
+const elementText = document.querySelector('.element__text'); //текст из темплэйта
 
-function addFigure({name, link}) {
-    const figureElement = figureTemplate.querySelector('.element').cloneNode(true);
-    figureElement.querySelector('.element__pic').src = link;
-    figureElement.querySelector('.element__text').textContent = name;
-    elementsContainer.prepend(figureElement);
-};
+const popupFormCard = document.querySelector('popupCard'); // id формы попапа
+const popupPic = document.querySelector('.popup__pic');
+const popupText = document.querySelector('.popup__text');
+  
+  function createElement (link, name) {    
+    const cardElement = cardTemplate.cloneNode(true); //вывод карточки из массива
+    console.log(cardElement);
+          cardElement.querySelector('.element__pic').src = link;
+          cardElement.querySelector('.element__text').textContent = name;
+          cardElement.querySelector('.element__pic').alt = name;
+  
+          cardElement.querySelector('.element__like').addEventListener('click', function (evt) {   // ставим лайки
+            evt.target.classList.toggle('element__like_active');
+            });
+  
+          cardElement.querySelector('.element__trash').addEventListener('click', function () {   // удаляем картинку
+            cardElement.remove();
+            });
+  
+            cardElement.querySelector('.element__pic').addEventListener('click', () => {
+              togglePopupState(popupImage);
+              popupPic.src = link;
+              popupText.textContent = name;
+              popupPic.alt = name;
+              console.log(cardElement);
+            });
+          return cardElement; 
+  };
+  
+  initialCards.forEach((card) => {
+      const elementsDescription = createElement(card.link, card.name);
+            cardsContainer.append(elementsDescription);
+  });
 
-createImage();
+const addCardField = document.getElementById('placeName');
+const addLinkField = document.getElementById('placeLink'); //инпут ввод линка
+const addCardButton = document.getElementById('addSaveButton'); //инпут ввод места
+  
+  addCardButton.addEventListener('click', newCard) //добавляет пользовательскую картинку на страницу
+  function newCard() {
+    const elementsDescription = createElement(addLinkField.value, addCardField.value);
+    cardsContainer.prepend(elementsDescription);
+    console.log(addCardField.value);
+    console.log(addLinkField.value);
+  }
 
 function openPopup () {
     togglePopupState(popupEdit);
@@ -66,7 +107,10 @@ function openPopup () {
     popupHobby.value = profileHobby.textContent;
 };
 
-function fillForm(evt) {
+
+
+
+function fillForm(evt) {  //форма заполнения попапа с инфо
     evt.preventDefault();
     profileName.textContent = popupName.value;
     profileHobby.textContent = popupHobby.value; 
@@ -74,9 +118,23 @@ function fillForm(evt) {
 };
 
 
-buttonPopupOpen.addEventListener('click', (openPopup));
-addImageOpen.addEventListener('click', () => togglePopupState(popupAdd));
+function fillAddForm(evt) { //форма заполнения попапа с картинкой
+  evt.preventDefault();
+  addCardField.value = "";
+  addLinkField.value = "";
+  togglePopupState(popupAdd);
+};
+
+
+
+buttonPopupOpen.addEventListener('click', openPopup);//edit button
+addImageOpen.addEventListener('click', () => togglePopupState(popupAdd));//add button
 buttonCloseEdit.addEventListener('click', () => togglePopupState(popupEdit));
 buttonCloseAdd.addEventListener('click', () => togglePopupState(popupAdd));
+buttonCardClose.addEventListener('click', () => togglePopupState(popupImage));
+
 popupFormEdit.addEventListener('submit', fillForm);
-popupFormAdd.addEventListener('submit', () => togglePopupState(popupAdd));
+popupFormAdd.addEventListener('submit', fillAddForm);
+
+
+
