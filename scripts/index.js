@@ -1,19 +1,24 @@
+// модификаторы попапов
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const popupAdd = document.querySelector('.popup_type_add-pic');
-const popupImage = document.querySelector('.popup_type_show-pic'); //модификатор попапа изображения
+const popupImage = document.querySelector('.popup_type_show-pic'); 
 
+// кнопки открытия попапов
 const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
 const addImageOpen = document.querySelector('.profile-info__add-button');
 
-const buttonCloseEdit = document.getElementById('editClose');
-const buttonCloseAdd = document.getElementById('addClose');
-const buttonCardClose = document.getElementById('cardClose');
+// кнопки закрытия попапов
+const buttonCloseEdit = document.querySelector('#editClose');
+const buttonCloseAdd = document.querySelector('#addClose');
+const buttonCardClose = document.querySelector('#cardClose');
 
-const popupFormEdit = document.getElementById('popupEdit');
-const popupFormAdd = document.getElementById('popupAdd');
+// формы для заполнения 
+const popupFormEdit = document.querySelector('#popupEdit');
+const popupFormAdd = document.querySelector('#popupAdd');
 
-const popupName = document.getElementById('name');
-const popupHobby = document.getElementById('hobby');
+// переменные для формы edit info
+const popupName = document.querySelector('#name');
+const popupHobby = document.querySelector('#hobby');
 const profileName = document.querySelector('.profile-info__name');
 const profileHobby = document.querySelector('.profile-info__profession');
 
@@ -46,60 +51,59 @@ const initialCards = [
     }
   ]; 
   
-
-  const cardsContainer = document.querySelector('.elements-container');
-  const cardsTemplate = document.querySelector('#template-cards').content;
-  const cardTemplate = cardsTemplate.querySelector('.element');
-  
-
-const elementPic = document.querySelector('.element__pic'); //картинка из темплэйта
-const elementText = document.querySelector('.element__text'); //текст из темплэйта
+// создаем галерею картинок template + user
+const cardsContainer = document.querySelector('.elements-container');
+const cardsTemplate = document.querySelector('#template-cards').content;
+const cardTemplate = cardsTemplate.querySelector('.element');
 
 const popupFormCard = document.querySelector('popupCard'); // id формы попапа
 const popupPic = document.querySelector('.popup__pic');
 const popupText = document.querySelector('.popup__text');
+
+function createElement (link, name) {    
+  const cardElement = cardTemplate.cloneNode(true); //вывод карточки из массива
+  const elementPic = cardElement.querySelector('.element__pic'); //картинка из темплэйта
+  const elementText = cardElement.querySelector('.element__text'); //текст из темплэйта
+  const elementLike = cardElement.querySelector('.element__like'); 
+  const elementTrash = cardElement.querySelector('.element__trash'); 
+  const toggleElLikeState = (likeToToggle) => likeToToggle.classList.toggle('element__like_active'); 
+
+        elementPic.src = link;
+        elementText.textContent = name;
+        elementPic.alt = name;
   
-  function createElement (link, name) {    
-    const cardElement = cardTemplate.cloneNode(true); //вывод карточки из массива
-    console.log(cardElement);
-          cardElement.querySelector('.element__pic').src = link;
-          cardElement.querySelector('.element__text').textContent = name;
-          cardElement.querySelector('.element__pic').alt = name;
+elementLike.addEventListener('click', function (evt) {   // ставим лайки
+  evt.target.toggleElLikeState();
+});
   
-          cardElement.querySelector('.element__like').addEventListener('click', function (evt) {   // ставим лайки
-            evt.target.classList.toggle('element__like_active');
-            });
+elementTrash.addEventListener('click', function () {   // удаляем картинку
+    cardElement.remove();
+});
   
-          cardElement.querySelector('.element__trash').addEventListener('click', function () {   // удаляем картинку
-            cardElement.remove();
-            });
+elementPic.addEventListener('click', () => {
+  togglePopupState(popupImage);
+  popupPic.src = link;
+  popupText.textContent = name;
+  popupPic.alt = name;
+});
+          
+return cardElement; 
+};
   
-            cardElement.querySelector('.element__pic').addEventListener('click', () => {
-              togglePopupState(popupImage);
-              popupPic.src = link;
-              popupText.textContent = name;
-              popupPic.alt = name;
-              console.log(cardElement);
-            });
-          return cardElement; 
-  };
-  
-  initialCards.forEach((card) => {
-      const elementsDescription = createElement(card.link, card.name);
-            cardsContainer.append(elementsDescription);
+initialCards.forEach((card) => {
+  const elementsDescription = createElement(card.link, card.name);
+        cardsContainer.append(elementsDescription);
   });
 
 const addCardField = document.getElementById('placeName');
 const addLinkField = document.getElementById('placeLink'); //инпут ввод линка
 const addCardButton = document.getElementById('addSaveButton'); //инпут ввод места
   
-  addCardButton.addEventListener('click', newCard) //добавляет пользовательскую картинку на страницу
+addCardButton.addEventListener('click', newCard) //добавляет пользовательскую картинку на страницу
   function newCard() {
     const elementsDescription = createElement(addLinkField.value, addCardField.value);
-    cardsContainer.prepend(elementsDescription);
-    console.log(addCardField.value);
-    console.log(addLinkField.value);
-  }
+          cardsContainer.prepend(elementsDescription);
+  };
 
 function openPopup () {
     togglePopupState(popupEdit);
@@ -107,14 +111,11 @@ function openPopup () {
     popupHobby.value = profileHobby.textContent;
 };
 
-
-
-
 function fillForm(evt) {  //форма заполнения попапа с инфо
-    evt.preventDefault();
-    profileName.textContent = popupName.value;
-    profileHobby.textContent = popupHobby.value; 
-    togglePopupState(popupEdit);
+  evt.preventDefault();
+  profileName.textContent = popupName.value;
+  profileHobby.textContent = popupHobby.value; 
+  togglePopupState(popupEdit);
 };
 
 
@@ -125,16 +126,10 @@ function fillAddForm(evt) { //форма заполнения попапа с к
   togglePopupState(popupAdd);
 };
 
-
-
 buttonPopupOpen.addEventListener('click', openPopup);//edit button
 addImageOpen.addEventListener('click', () => togglePopupState(popupAdd));//add button
 buttonCloseEdit.addEventListener('click', () => togglePopupState(popupEdit));
 buttonCloseAdd.addEventListener('click', () => togglePopupState(popupAdd));
 buttonCardClose.addEventListener('click', () => togglePopupState(popupImage));
-
 popupFormEdit.addEventListener('submit', fillForm);
 popupFormAdd.addEventListener('submit', fillAddForm);
-
-
-

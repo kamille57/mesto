@@ -29,3 +29,5 @@
 @import url(../blocks/popup/__pic/popup__pic.css);
 @import url(../blocks/popup/__text/popup__text.css);
 @import url(../blocks/popup/__figure/popup__figure.css);
+@import url(../blocks/popup/_type_show-pic/popup_type_show-pic.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
