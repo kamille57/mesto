@@ -66,14 +66,13 @@ function createElement (link, name) {
   const elementText = cardElement.querySelector('.element__text'); //текст из темплэйта
   const elementLike = cardElement.querySelector('.element__like'); 
   const elementTrash = cardElement.querySelector('.element__trash'); 
-  const toggleElLikeState = (likeToToggle) => likeToToggle.classList.toggle('element__like_active'); 
 
         elementPic.src = link;
         elementText.textContent = name;
         elementPic.alt = name;
   
 elementLike.addEventListener('click', function (evt) {   // ставим лайки
-  evt.target.toggleElLikeState();
+  evt.target.classList.toggle('element__like_active');
 });
   
 elementTrash.addEventListener('click', function () {   // удаляем картинку
