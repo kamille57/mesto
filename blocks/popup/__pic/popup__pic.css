@@ -1,6 +1,6 @@
 .popup__pic {
-   display: flex;
-   place-self: center;
+  display: flex;
+  place-self: center;
   max-width: 75vw;
   max-height: 75vh;
   object-fit: cover;
