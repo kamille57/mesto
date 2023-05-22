@@ -24,33 +24,6 @@ const profileHobby = document.querySelector('.profile-info__profession');
 
 const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
 
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ]; 
-  
 // создаем галерею картинок template + user
 const cardsContainer = document.querySelector('.elements-container');
 const cardsTemplate = document.querySelector('#template-cards').content;
@@ -66,13 +39,13 @@ function createElement (link, name) {
   const elementText = cardElement.querySelector('.element__text'); //текст из темплэйта
   const elementLike = cardElement.querySelector('.element__like'); 
   const elementTrash = cardElement.querySelector('.element__trash'); 
-
+  
         elementPic.src = link;
         elementText.textContent = name;
         elementPic.alt = name;
   
-elementLike.addEventListener('click', function (evt) {   // ставим лайки
-  evt.target.classList.toggle('element__like_active');
+elementLike.addEventListener('click', function () {   // ставим лайки
+  elementLike.classList.toggle('element__like_active');
 });
   
 elementTrash.addEventListener('click', function () {   // удаляем картинку
