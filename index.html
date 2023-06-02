@@ -29,28 +29,35 @@
     <footer class="footer">
         <p class="footer__copyright"> &copy; 2023 Mesto Russia</p>
     </footer>
-   <div class="popup popup_type_profile-edit" id="popupEdit">
-      <div class="popup__container">
-        <button type="button" aria-label="Close" class="popup__closed" id="editClose"></button>
-          <form class="popup-form" method="post" action="#" id="popupEditForm" name="ProfileEdit"> 
-            <h2 class="popup-form__heading">Редактировать профиль</h2>
-            <input  class="popup__item" type="text" name="name" placeholder="Введите свое имя" id="name" required>
-            <input  class="popup__item" type="text" name="hobby" placeholder="О себе" id="hobby" required>
-            <button type="submit" class="popup-form__save-button">Сохранить</button>
-          </form>
-      </div>
-    </div>
+
     <div class="popup popup_type_add-pic" id="popupAdd">
       <div class="popup__container">
         <button type="button" aria-label="Close" class="popup__closed" id="addClose"></button>
-          <form class="popup-form" method="post" action="#" id="popupAddForm" name="ProfileAdd"> 
+          <form class="popup-form" method="post" action="#" id="popupAddForm" name="ProfileAdd" novalidate> 
             <h2 class="popup-form__heading">Новое место</h2>
-            <input  class="popup__item" type="text" name="placeName" placeholder="Название" id="placeName" required>
-            <input  class="popup__item" type="url" name="placeLink" placeholder="Ссылка на картинку" id="placeLink" required>
-            <button type="submit" class="popup-form__save-button" id="addSaveButton">Создать</button>
+            <input type="text" class="popup__item" name="placeName" placeholder="Название" id="placeName" minlength="2" maxlength="30" required>
+            <span id="placeName-error" class="error"></span>
+            <input type="url" class="popup__item" name="placeLink" placeholder="Ссылка на картинку" id="placeLink" required>
+            <span id="placeLink-error" class="error"></span>
+            <button type="submit" class="popup-form__save-button popup-form__save-button_valid" id="addSaveButton">Создать</button>
           </form>
       </div>
     </div>
+
+   <div class="popup popup_type_profile-edit" id="popupEdit">
+      <div class="popup__container">
+        <button type="button" aria-label="Close" class="popup__closed" id="editClose"></button>
+          <form class="popup-form" method="post" action="#" id="popupEditForm" name="ProfileEdit" novalidate> 
+            <h2 class="popup-form__heading">Редактировать профиль</h2>
+            <input type="text" class="popup__item" name="name" placeholder="Введите свое имя" id="name" minlength="2" maxlength="40" required>
+            <span id="name-error" class="error"></span>
+            <input type="text" class="popup__item" name="hobby" placeholder="О себе" id="hobby" minlength="2" maxlength="200" required>
+            <span id="hobby-error" class="error"></span>
+            <button type="submit" class="popup-form__save-button popup-form__save-button_valid">Сохранить</button>
+          </form>
+      </div>
+    </div>
+
     <div class="popup popup_type_show-pic" id="popupCard">
       <div class="popup__container">
         <button type="button" aria-label="Close" class="popup__closed" id="cardClose"></button>
@@ -70,5 +77,6 @@
     </template>
     <script src="scripts/indexImages.js"></script>
     <script src="scripts/index.js"></script>
+    <script src="scripts/indexValidation.js"></script>
   </body>
 </html>
