@@ -13,8 +13,7 @@ const formSubmitButtonChangeState = (form) => {
 };
 
 const getErrorElement = (input) => {
-    return document.querySelector(`#${input.id}-error`)
-
+    return document.querySelector(`#${input.id}-error`);
 };
 
 const hideError = (input) => {
