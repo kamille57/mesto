@@ -110,10 +110,18 @@ document.querySelectorAll('.popup').forEach((popup) => { // функция за�
   });
 });
 
-document.querySelectorAll('.popup').forEach((popup) => { // функция закрытия всех окон на overlay и крестик
+document.querySelectorAll('.popup').forEach((popup) => { // функция закрытия всех окон на крестик
   popup.addEventListener('click', (evt) => {
     const target = evt.target;
-    if ((evt.target === evt.currentTarget) || (target.classList.contains('popup__closed'))) {
+    if (target.classList.contains('popup__closed')) {
+      popup.classList.remove('popup_opened');
+    }
+  });
+});
+
+document.querySelectorAll('.popup').forEach((popup) => { // функция закрытия всех окон на overlay
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target === evt.currentTarget) {
       popup.classList.remove('popup_opened');
     }
   });
