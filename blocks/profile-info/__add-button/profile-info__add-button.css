@@ -11,6 +11,7 @@
   grid-area: add;
   justify-self: center;
   align-self: center;
+  outline: none;
 }
 
 .profile-info__add-button:hover {

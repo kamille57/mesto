@@ -35,9 +35,9 @@
         <button type="button" aria-label="Close" class="popup__closed" id="addClose"></button>
           <form class="popup-form" method="post" action="#" id="popupAddForm" name="ProfileAdd" novalidate> 
             <h2 class="popup-form__heading">Новое место</h2>
-            <input type="text" class="popup__item" name="placeName" placeholder="Название" id="placeName" minlength="2" maxlength="30" required>
+            <input type="text" class="popup__input" name="placeName" placeholder="Название" id="placeName" minlength="2" maxlength="30" required>
             <span id="placeName-error" class="error"></span>
-            <input type="url" class="popup__item" name="placeLink" placeholder="Ссылка на картинку" id="placeLink" required>
+            <input type="url" class="popup__input" name="placeLink" placeholder="Ссылка на картинку" id="placeLink" required>
             <span id="placeLink-error" class="error"></span>
             <button type="submit" class="popup-form__save-button popup-form__save-button_valid" id="addSaveButton">Создать</button>
           </form>
@@ -49,9 +49,9 @@
         <button type="button" aria-label="Close" class="popup__closed" id="editClose"></button>
           <form class="popup-form" method="post" action="#" id="popupEditForm" name="ProfileEdit" novalidate> 
             <h2 class="popup-form__heading">Редактировать профиль</h2>
-            <input type="text" class="popup__item" name="name" placeholder="Введите свое имя" id="name" minlength="2" maxlength="40" required>
+            <input type="text" class="popup__input" name="name" placeholder="Введите свое имя" id="name" minlength="2" maxlength="40" required>
             <span id="name-error" class="error"></span>
-            <input type="text" class="popup__item" name="hobby" placeholder="О себе" id="hobby" minlength="2" maxlength="200" required>
+            <input type="text" class="popup__input" name="hobby" placeholder="О себе" id="hobby" minlength="2" maxlength="200" required>
             <span id="hobby-error" class="error"></span>
             <button type="submit" class="popup-form__save-button popup-form__save-button_valid">Сохранить</button>
           </form>
@@ -75,8 +75,9 @@
           <button type="button" class="element__like" aria-label="Лайк"></button>
       </article>
     </template>
+    <script src="scripts/validate1.js"></script>
     <script src="scripts/indexImages.js"></script>
     <script src="scripts/index.js"></script>
-    <script src="scripts/indexValidation.js"></script>
+    
   </body>
 </html>

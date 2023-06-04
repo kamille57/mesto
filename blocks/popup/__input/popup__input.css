@@ -1,4 +1,4 @@
-.popup__item {
+.popup__input {
   margin: 0 auto;
   padding: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 20%);
@@ -15,10 +15,6 @@
   outline: none;
 }
 
-/*.popup__item:invalid{
-  border-bottom: 1px solid red;
-}*/
-
-.popup__item::placeholder {
+.popup__input::placeholder {
   color: rgb(0, 0, 0, .2);
 }

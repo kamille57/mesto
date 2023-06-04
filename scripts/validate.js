@@ -1,5 +1,6 @@
+
 const formSubmitButtonChangeState = (form) => {
-    const button = form.querySelector('.popup-form__save-button');
+    const button = document.querySelector('.popup-form__save-button');
     if (!form.checkValidity()) {
         button.setAttribute('disabled', true);
         button.classList.add('popup-form__save-button_invalid');
@@ -19,14 +20,14 @@ const getErrorElement = (input) => {
 const hideError = (input) => {
     const errorElement = getErrorElement(input);
     errorElement.textContent = '';
-    input.classList.remove('popup__item_error');
+    input.classList.remove('popup__input_error');
 
 };
 
 const showError = (input) => {
     const errorElement = getErrorElement(input);
     errorElement.textContent = input.validationMessage;
-    input.classList.add('popup__item_error');
+    input.classList.add('popup__input_error');
 };
 
 const validateInput = (input) => {

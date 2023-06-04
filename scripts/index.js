@@ -98,20 +98,20 @@ addImageOpen.addEventListener('click', fillAddForm);// add button
 popupFormEdit.addEventListener('submit', fillInfoForm);
 popupFormAdd.addEventListener('submit', fillAddForm);
 
-document.addEventListener('click', function (event) { // функция закрытия всех попапов на крестик
-  const target = event.target;
-
-  if (target.classList.contains('popup__closed')) {
-    target.closest('.popup_opened').classList.remove('popup_opened');
-  }
-});
-
-
 document.querySelectorAll('.popup').forEach((popup) => { // функция закрытия всех окон на esc
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       popup.classList.remove('popup_opened');
-    }});
+    }
+  });
 });
 
-   
+document.querySelectorAll('.popup').forEach((popup) => { // функция закрытия всех окон на overlay и крестик
+  popup.addEventListener('click', (evt) => {
+    const target = evt.target;
+    if ((evt.target === evt.currentTarget) || (target.classList.contains('popup__closed'))) {
+      popup.classList.remove('popup_opened');
+    }
+  });
+});
+

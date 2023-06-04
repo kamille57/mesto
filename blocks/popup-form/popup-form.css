@@ -1,9 +1,10 @@
 .popup-form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  justify-content: space-between;
   border-radius: 10px;
-  max-width: 430px;
+  width: 430px;
+  height: 330px;
   background-color: #FFF;
   margin: auto;
   padding: 34px 36px 37px;
@@ -12,7 +13,7 @@
 
 @media screen and (max-width: 620px) {
   .popup-form {
-    max-width: 238px;
+    width: 100%;
     padding: 25px 22px;
   }
 }

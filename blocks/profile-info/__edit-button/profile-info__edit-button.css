@@ -11,6 +11,7 @@
   cursor: pointer;
   grid-area: edit;
   align-self: end;
+  outline: none;
 }
 
 .profile-info__edit-button:hover {
