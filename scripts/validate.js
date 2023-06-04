@@ -60,3 +60,9 @@ document.querySelectorAll('.popup-form').forEach((popupForm) => {
     popupForm.addEventListener('submit', sendForm);
     formSubmitButtonChangeState(popupForm);
 });
+
+
+
+
+
+

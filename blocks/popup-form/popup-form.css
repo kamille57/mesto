@@ -1,10 +1,7 @@
 .popup-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  
   border-radius: 10px;
-  width: 430px;
-  height: 330px;
+  
   background-color: #FFF;
   margin: auto;
   padding: 34px 36px 37px;
