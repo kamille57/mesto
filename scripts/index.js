@@ -72,10 +72,17 @@ function newCard() {
   cardsContainer.prepend(elementsDescription);
 };
 
+
+const spanReset = (validationConfig, formElement) => {
+  const errorElement = Array.from(formElement.querySelectorAll(`#${inputElement.id}-error`));
+  errorElement.classList.add(validationConfig.errorInvalidClass);  
+}
+
 function openPopup() {
   togglePopupState(popupEdit);
   popupName.value = profileName.textContent;
   popupHobby.value = profileHobby.textContent;
+  resetFormValidation(popupEdit, validationConfig); 
 };
 
 function fillInfoForm(evt) {  // форма заполнения попапа с инфо
@@ -90,6 +97,7 @@ function fillAddForm(evt) { // форма заполнения попапа с �
   evt.preventDefault();
   addCardField.value = "";
   addLinkField.value = "";
+  resetFormValidation(popupAdd, validationConfig); 
   togglePopupState(popupAdd);
 };
 
@@ -121,6 +129,16 @@ document.querySelectorAll('.popup').forEach((popup) => { // функция за�
       popup.classList.remove('popup_opened');
     }
   });
+});
+
+enableValidation({  
+  formElement: '.popup-form',  
+  inputElement: '.popup__input',  
+  submitButtonSelector: '.popup-form__save-button',  
+  invalidButtonClass: 'popup-form__save-button_invalid',  
+  inputErrorClass: 'popup__input_error',  
+  errorInvalidClass: 'error_invalid',  
+  fieldSetSelector: '.popup-form__set',
 });
 
 

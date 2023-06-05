@@ -65,12 +65,11 @@ const enableValidation = (validationConfig) => {
   });  
 };  
  
-enableValidation({  
-  formElement: '.popup-form',  
-  inputElement: '.popup__input',  
-  submitButtonSelector: '.popup-form__save-button',  
-  invalidButtonClass: 'popup-form__save-button_invalid',  
-  inputErrorClass: 'popup__input_error',  
-  errorInvalidClass: 'error_invalid',  
-  fieldSetSelector: '.popup-form__set'  
-});
+const resetFormValidation = (formElement, validationConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+  inputList.forEach((inputElement) => {
+    hideInputError(validationConfig, formElement, inputElement);
+  });
+  toggleButtonState(validationConfig, formElement, buttonElement);
+};
