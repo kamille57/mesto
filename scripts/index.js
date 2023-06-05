@@ -76,10 +76,6 @@ function openPopup() {
   togglePopupState(popupEdit);
   popupName.value = profileName.textContent;
   popupHobby.value = profileHobby.textContent;
-  const inputList = Array.from(popupEdit.querySelectorAll(validationConfig.inputElement)); 
-inputList.forEach((inputElement) => { 
-  hideInputError(validationConfig, popupEdit, inputElement);
-});
 };
 
 function fillInfoForm(evt) {  // форма заполнения попапа с инфо
