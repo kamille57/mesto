@@ -8,8 +8,8 @@ const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
 const addImageOpen = document.querySelector('.profile-info__add-button');
 
 // формы для заполнения 
-const popupFormEdit = document.querySelector('#popupEdit');
-const popupFormAdd = document.querySelector('#popupAdd');
+const popupFormEdit = document.querySelector('#popupEditForm');
+const popupFormAdd = document.querySelector('#popupAddForm');
 
 // переменные для формы edit info
 const popupName = document.querySelector('#name');
@@ -75,14 +75,14 @@ function newCard() {
 
 const spanReset = (validationConfig, formElement) => {
   const errorElement = Array.from(formElement.querySelectorAll(`#${inputElement.id}-error`));
-  errorElement.classList.add(validationConfig.errorInvalidClass);  
+  errorElement.classList.add(validationConfig.errorInvalidClass);
 }
 
 function openPopup() {
   togglePopupState(popupEdit);
   popupName.value = profileName.textContent;
   popupHobby.value = profileHobby.textContent;
-  resetFormValidation(popupEdit, validationConfig); 
+  resetFormValidation(popupFormEdit, validationConfig);
 };
 
 function fillInfoForm(evt) {  // форма заполнения попапа с инфо
@@ -97,7 +97,7 @@ function fillAddForm(evt) { // форма заполнения попапа с �
   evt.preventDefault();
   addCardField.value = "";
   addLinkField.value = "";
-  resetFormValidation(popupAdd, validationConfig); 
+  resetFormValidation(popupFormAdd, validationConfig);
   togglePopupState(popupAdd);
 };
 
@@ -131,15 +131,12 @@ document.querySelectorAll('.popup').forEach((popup) => { // функция за�
   });
 });
 
-enableValidation({  
-  formElement: '.popup-form',  
-  inputElement: '.popup__input',  
-  submitButtonSelector: '.popup-form__save-button',  
-  invalidButtonClass: 'popup-form__save-button_invalid',  
-  inputErrorClass: 'popup__input_error',  
-  errorInvalidClass: 'error_invalid',  
+enableValidation({
+  formElement: '.popup-form',
+  inputElement: '.popup__input',
+  submitButtonSelector: '.popup-form__save-button',
+  invalidButtonClass: 'popup-form__save-button_invalid',
+  inputErrorClass: 'popup__input_error',
+  errorInvalidClass: 'error_invalid',
   fieldSetSelector: '.popup-form__set',
 });
-
-
-
