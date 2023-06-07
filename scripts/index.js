@@ -1,11 +1,3 @@
-const cardConfig = {
-  picElement: '.element__pic',
-  textElement: '.element__text',
-  likeElement: '.element__like',
-  trashElement: '.element__trash',
-  likeElementActiveClass: 'element__like_active'
-};
-
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const popupAdd = document.querySelector('.popup_type_add-pic');
 const popupImage = document.querySelector('.popup_type_show-pic');
@@ -23,8 +15,6 @@ const popupName = document.querySelector('#name');
 const popupHobby = document.querySelector('#hobby');
 const profileName = document.querySelector('.profile-info__name');
 const profileHobby = document.querySelector('.profile-info__profession');
-
-const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
 
 // создаем галерею картинок template + user
 const cardsContainer = document.querySelector('.elements-container');
@@ -57,7 +47,7 @@ function createElement(link, name, cardConfig) {
   });
 
   elementPic.addEventListener('click', () => {
-    togglePopupState(popupImage);
+    openPopup(popupImage);
     popupPic.src = link;
     popupText.textContent = name;
     popupPic.alt = name;
@@ -76,26 +66,9 @@ function newCard() {
   cardsContainer.prepend(elementsDescription);
 };
 
-function openEditPopup() {
-  togglePopupState(popupEdit);
-  popupName.value = profileName.textContent;
-  popupHobby.value = profileHobby.textContent;
-  resetFormValidation(popupFormEdit, validationConfig);
-};
-
-function fillInfoForm(evt) {  // форма заполнения попапа с инфо
-  evt.preventDefault();
-  profileName.textContent = popupName.value;
-  profileHobby.textContent = popupHobby.value;
-  togglePopupState(popupEdit);
-};
-
-function fillAddForm(evt) { // форма заполнения попапа с картинкой
-  evt.preventDefault();
-  addCardField.value = "";
-  addLinkField.value = "";
-  resetFormValidation(popupFormAdd, validationConfig);
-  togglePopupState(popupAdd);
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handlePopupKeydown);
 };
 
 function closePopup(popup) {
@@ -103,9 +76,26 @@ function closePopup(popup) {
   document.removeEventListener('keydown', handlePopupKeydown);
 };
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handlePopupKeydown);
+function openEditPopup() { // заполняем инпуты данными со страницы
+  openPopup(popupEdit);
+  popupName.value = profileName.textContent;
+  popupHobby.value = profileHobby.textContent;
+  resetFormValidation(popupFormEdit, validationConfig);
+};
+
+function fillInfoForm(evt) {  // заполнение инфо на главной странице
+  evt.preventDefault();
+  profileName.textContent = popupName.value;
+  profileHobby.textContent = popupHobby.value;
+  closePopup(popupEdit);
+};
+
+function fillAddForm(evt) { // форма заполнения попапа с картинкой
+  evt.preventDefault();
+  addCardField.value = "";
+  addLinkField.value = "";
+  resetFormValidation(popupFormAdd, validationConfig);
+  openPopup(popupAdd);
 };
 
 function handlePopupKeydown(event) { // функция закрытия окон на esc
@@ -116,31 +106,31 @@ function handlePopupKeydown(event) { // функция закрытия окон
   }
 }
 
-function handlePopupCloseClick(event) {
+function handlePopupCloseClick(event) { // функция закрытия окон на крестик
   const target = event.target;
   if (target.classList.contains('popup__closed')) {
-    const popup = target.closest('.popup');
+    const popup = target.closest(popups);
     closePopup(popup);
   }
 }
-
-function handlePopupOverlayMouseDown(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(event.target);
-  }
-}
-
-popups.forEach((popup) => {
-  const closePopupElements = popup.querySelectorAll('.popup__closed');
-  closePopupElements.forEach((closePopupElement) => {
-    closePopupElement.addEventListener('click', handlePopupClose);
-  });
-});
 
 function handlePopupClose(event) {
   const popup = event.target.closest('.popup');
   popup.classList.remove('popup_opened');
 };
+
+popups.forEach((popup) => { // функция закрытия всех окон на overlay 
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(evt.currentTarget);
+    }
+  });
+});
+
+popups.forEach((popup) => {
+  const closePopupElement = popup.querySelector('.popup__closed');
+  closePopupElement.addEventListener('click', handlePopupClose);
+});
 
 buttonPopupOpen.addEventListener('click', openEditPopup);// edit button
 addImageOpen.addEventListener('click', fillAddForm);// add button
