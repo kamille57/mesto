@@ -1,6 +1,5 @@
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const popupAdd = document.querySelector('.popup_type_add-pic');
-const popupImage = document.querySelector('.popup_type_show-pic');
 
 // кнопки открытия попапов
 const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
@@ -17,12 +16,6 @@ const profileName = document.querySelector('.profile-info__name');
 const profileHobby = document.querySelector('.profile-info__profession');
 
 // создаем галерею картинок template + user
-const cardsContainer = document.querySelector('.elements-container');
-const cardsTemplate = document.querySelector('#template-cards').content;
-const cardTemplate = cardsTemplate.querySelector('.element');
-const popupFormCard = document.querySelector('popupCard'); // id формы попапа
-const popupPic = document.querySelector('.popup__pic');
-const popupText = document.querySelector('.popup__text');
 const addCardField = document.querySelector('#placeName');
 const addLinkField = document.querySelector('#placeLink'); // инпут ввод линка
 const addCardButton = document.querySelector('#addSaveButton'); // инпут ввод места
@@ -66,14 +59,15 @@ function newCard() {
   cardsContainer.prepend(elementsDescription);
 };
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handlePopupKeydown);
-};
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handlePopupKeydown);
+};
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handlePopupKeydown);
 };
 
 function openEditPopup() { // заполняем инпуты данными со страницы
@@ -96,6 +90,11 @@ function fillAddForm(evt) { // форма заполнения попапа с �
   addLinkField.value = "";
   resetFormValidation(popupFormAdd, validationConfig);
   openPopup(popupAdd);
+};
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handlePopupKeydown);
 };
 
 function handlePopupKeydown(event) { // функция закрытия окон на esc
