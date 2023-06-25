@@ -71,3 +71,16 @@ const resetFormValidation = (formElement, validationConfig) => {
   });
   toggleButtonState(validationConfig, formElement, buttonElement);
 };
+
+
+const validationConfig = {
+  formElement: '.popup-form',
+  inputElement: '.popup__input',
+  cardTemplateSelector: '.card-template',
+  elementsContainerSelector: '.elements-container',
+  submitButtonSelector: '.popup-form__save-button',
+  invalidButtonClass: 'popup-form__save-button_invalid',
+  inputErrorClass: 'popup__input_error',
+  errorInvalidClass: 'error_invalid',
+  fieldSetSelector: '.popup-form__set',
+};

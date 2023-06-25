@@ -1,3 +1,7 @@
+import * as index from './index.js';
+import { formValidator } from './formValidator';
+import * as constants from './constants.js'; 
+
 class Card {
 
     constructor(data, templateSelector, cardConfig) {
@@ -57,3 +61,6 @@ initialCards.forEach((item) => {
     const cardElement = card.generateCard();
     document.querySelector('.elements-container').append(cardElement);
 });
+
+
+export { initialCards, Card };

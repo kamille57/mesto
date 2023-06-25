@@ -1,3 +1,7 @@
+import * as index from './index.js';
+import { formValidator } from './formValidator';
+import { initialCards, Card } from './card.js';
+
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const popupAdd = document.querySelector('.popup_type_add-pic');
 const popupElement = document.querySelector('.popup_type_show-pic');
@@ -28,6 +32,8 @@ const popupCloseButton = document.querySelector('#cardClose');
 const popups = document.querySelectorAll('.popup');
 
 const cardConfig = {
+  cardTemplate: '.card-template',
+  cardContainer: '.elements-container',
   cardElement: '.element',
   picElement: '.element__pic',
   textElement: '.element__text',
@@ -39,6 +45,8 @@ const cardConfig = {
 const validationConfig = {
   formElement: '.popup-form',
   inputElement: '.popup__input',
+  cardTemplateSelector: '.card-template',
+  elementsContainerSelector: '.elements-container',
   submitButtonSelector: '.popup-form__save-button',
   invalidButtonClass: 'popup-form__save-button_invalid',
   inputErrorClass: 'popup__input_error',
@@ -46,3 +54,5 @@ const validationConfig = {
   fieldSetSelector: '.popup-form__set',
 };
 
+
+export * from './constants';
