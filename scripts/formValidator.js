@@ -1,10 +1,9 @@
-import * as index from './index.js';
-import * as constants from './constants.js'; 
-import { initialCards, Card } from './card.js';
+import { validationConfig } from './constants.js';
 
-class FormValidator {
+export class FormValidator {
 
     constructor(validationConfig, formElement) {
+        
         this._validationConfig = validationConfig;
         this._formElement = formElement;
         this._inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputElement));
@@ -72,6 +71,3 @@ class FormValidator {
         this._setEventListeners();
     }
 }
-
-
-export { FormValidator };

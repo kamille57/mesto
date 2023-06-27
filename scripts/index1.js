@@ -1,5 +1,6 @@
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const popupAdd = document.querySelector('.popup_type_add-pic');
+const cardsContainer = document.querySelector('.elements-container');
 
 // кнопки открытия попапов
 const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
@@ -59,6 +60,7 @@ function newCard() {
   cardsContainer.prepend(elementsDescription);
 };
 
+addCardButton.addEventListener('click', newCard) // добавляет пользовательскую картинку на страницу
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -135,5 +137,5 @@ buttonPopupOpen.addEventListener('click', openEditPopup);// edit button
 addImageOpen.addEventListener('click', fillAddForm);// add button
 popupFormEdit.addEventListener('submit', fillInfoForm);
 popupFormAdd.addEventListener('submit', fillAddForm);
-addCardButton.addEventListener('click', newCard) // добавляет пользовательскую картинку на страницу
+
 

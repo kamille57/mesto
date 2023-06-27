@@ -1,8 +1,6 @@
-import * as index from './index.js';
-import { formValidator } from './formValidator';
-import * as constants from './constants.js'; 
+import { showPicture } from './index.js';
 
-class Card {
+export class Card {
 
     constructor(data, templateSelector, cardConfig) {
 
@@ -13,13 +11,13 @@ class Card {
     }
 
     _getTemplate() {
-        const cardElement = document
+        const card = document
             .querySelector(this._templateSelector)
             .content
             .querySelector(this._cardConfig.cardElement)
             .cloneNode(true);
 
-        return cardElement;
+        return card;
     }
 
     generateCard() {
@@ -53,14 +51,4 @@ class Card {
     _handleOpenPopup() {
         showPicture(this._name, this._link);
     }
-
 };
-
-initialCards.forEach((item) => {
-    const card = new Card(item, '.card-template', cardConfig);
-    const cardElement = card.generateCard();
-    document.querySelector('.elements-container').append(cardElement);
-});
-
-
-export { initialCards, Card };

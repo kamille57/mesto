@@ -1,18 +1,47 @@
-import { formValidator } from './formValidator';
-import * as constants from './constants.js'; 
-import { initialCards, Card } from './card.js';
+import { FormValidator } from './formValidator.js';
+import { cardConfig, validationConfig, initialCards } from './constants.js';
+import { Card } from './card.js';
+
+const popupEdit = document.querySelector('.popup_type_profile-edit');
+const popupAdd = document.querySelector('.popup_type_add-pic');
+const popupElement = document.querySelector('.popup_type_show-pic');
+
+// переменные для формы edit info
+const popupName = document.querySelector('#name');
+const popupHobby = document.querySelector('#hobby');
+const profileName = document.querySelector('.profile-info__name');
+const profileHobby = document.querySelector('.profile-info__profession');
+
+// создаем галерею картинок template + user
+const addCardField = document.querySelector('#placeName');
+const addLinkField = document.querySelector('#placeLink'); // инпут ввод линка
+const addCardButton = document.querySelector('#addSaveButton'); // инпут ввод места
+
+// формы для заполнения 
+const popupFormEdit = document.querySelector('#popupEditForm');
+const popupFormAdd = document.querySelector('#popupAddForm');
+
+// кнопки открытия попапов
+const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
+const addImageOpen = document.querySelector('.profile-info__add-button');
+
+// переменные класса Card
+const popupImage = document.querySelector('.popup__pic');
+const popupText = document.querySelector('.popup__text');
+const popups = document.querySelectorAll('.popup');
+
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handlePopupKeydown);
 };
 
-function showPicture(name, link) {  
-    popupImage.src = link;  
-    popupImage.alt = name;  
-    popupText.textContent = name;  
-    openPopup(popupElement);  
-};  
+export function showPicture(name, link) {
+    popupImage.src = link;
+    popupImage.alt = name;
+    popupText.textContent = name;
+    openPopup(popupElement);
+};
 
 function openEditPopup() { // заполняем инпуты данными со страницы
     openPopup(popupEdit);
@@ -36,17 +65,6 @@ function fillAddForm(evt) { // форма заполнения попапа с �
     openPopup(popupAdd);
 };
 
-const formValidatorEdit = new FormValidator(validationConfig, popupFormEdit);
-formValidatorEdit.enableValidation();
-
-const formValidatorAdd = new FormValidator(validationConfig, popupFormAdd);
-formValidatorAdd.enableValidation();
-
-buttonPopupOpen.addEventListener('click', openEditPopup);// edit button
-addImageOpen.addEventListener('click', fillAddForm);// add button
-popupFormEdit.addEventListener('submit', fillInfoForm);
-popupFormAdd.addEventListener('submit', fillAddForm);
-
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', handlePopupKeydown);
@@ -57,14 +75,6 @@ function handlePopupKeydown(event) { // функция закрытия окон
         popups.forEach((popup) => {
             closePopup(popup);
         });
-    }
-};
-
-function handlePopupCloseClick(event) { // функция закрытия окон на крестик
-    const target = event.target;
-    if (target.classList.contains('popup__closed')) {
-        const popup = target.closest(popups);
-        closePopup(popup);
     }
 };
 
@@ -83,4 +93,36 @@ popups.forEach((popup) => {
     closePopupElement.addEventListener('click', handlePopupClose);
 });
 
-export * from './index.js';
+initialCards.forEach((data) => {
+    const card = new Card(data, '.card-template', cardConfig);
+    const cardElement = card.generateCard();
+
+    // Добавляем в DOM
+    document.querySelector('.elements-container').append(cardElement);
+});
+
+const formValidatorEdit = new FormValidator(validationConfig, popupFormEdit);
+formValidatorEdit.enableValidation();
+
+const formValidatorAdd = new FormValidator(validationConfig, popupFormAdd);
+formValidatorAdd.enableValidation();
+
+popupFormAdd.addEventListener('submit', (evt) => { 
+    evt.preventDefault(); 
+    const cardData = {
+        name: addCardField.value,
+        link: addLinkField.value
+    }
+    const card = new Card(cardData, '.card-template', cardConfig);   
+    console.log(card);
+    const cardElement = card.generateCard();  
+    console.log(cardElement); 
+    document.querySelector('.elements-container').prepend(cardElement);  
+    closePopup(popupAdd);   
+    popupFormAdd.reset();   
+});
+
+buttonPopupOpen.addEventListener('click', openEditPopup);// edit button
+addImageOpen.addEventListener('click', fillAddForm);// add button
+popupFormEdit.addEventListener('submit', fillInfoForm);
+popupFormAdd.addEventListener('submit', fillAddForm);

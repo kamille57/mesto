@@ -1,37 +1,4 @@
-import * as index from './index.js';
-import { formValidator } from './formValidator';
-import { initialCards, Card } from './card.js';
-
-const popupEdit = document.querySelector('.popup_type_profile-edit');
-const popupAdd = document.querySelector('.popup_type_add-pic');
-const popupElement = document.querySelector('.popup_type_show-pic');
-
-// переменные для формы edit info
-const popupName = document.querySelector('#name');
-const popupHobby = document.querySelector('#hobby');
-const profileName = document.querySelector('.profile-info__name');
-const profileHobby = document.querySelector('.profile-info__profession');
-
-// создаем галерею картинок template + user
-const addCardField = document.querySelector('#placeName');
-const addLinkField = document.querySelector('#placeLink'); // инпут ввод линка
-const addCardButton = document.querySelector('#addSaveButton'); // инпут ввод места
-
-// формы для заполнения 
-const popupFormEdit = document.querySelector('#popupEditForm');
-const popupFormAdd = document.querySelector('#popupAddForm');
-
-// кнопки открытия попапов
-const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
-const addImageOpen = document.querySelector('.profile-info__add-button');
-
-// переменные класса Card
-const popupImage = document.querySelector('.popup__pic');
-const popupText = document.querySelector('.popup__text');
-const popupCloseButton = document.querySelector('#cardClose');
-const popups = document.querySelectorAll('.popup');
-
-const cardConfig = {
+export const cardConfig = {
   cardTemplate: '.card-template',
   cardContainer: '.elements-container',
   cardElement: '.element',
@@ -42,7 +9,7 @@ const cardConfig = {
   likeElementActiveClass: 'element__like_active'
 };
 
-const validationConfig = {
+export const validationConfig = {
   formElement: '.popup-form',
   inputElement: '.popup__input',
   cardTemplateSelector: '.card-template',
@@ -54,5 +21,29 @@ const validationConfig = {
   fieldSetSelector: '.popup-form__set',
 };
 
-
-export * from './constants';
+export const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
