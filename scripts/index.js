@@ -107,24 +107,21 @@ initialCards.forEach((data) => {
     document.querySelector('.elements-container').append(cardElement);
 });
 
-
-
-popupFormAdd.addEventListener('submit', (evt) => { 
-    evt.preventDefault(); 
+popupFormAdd.addEventListener('submit', (evt) => {
+    evt.preventDefault();
     const cardData = {
         name: addCardField.value,
         link: addLinkField.value
     }
     const card = new Card(cardData, '.card-template', cardConfig);
     console.log(card);
-    const cardElement = card.generateCard();  
-    console.log(cardElement); 
-    document.querySelector('.elements-container').prepend(cardElement); 
-    closePopup(popupAdd, formValidatorAdd);   
-    popupFormAdd.reset(); 
+    const cardElement = card.generateCard();
+    console.log(cardElement);
+    document.querySelector('.elements-container').prepend(cardElement);
+    closePopup(popupAdd, formValidatorAdd);
+    popupFormAdd.reset();
 });
 
 buttonPopupOpen.addEventListener('click', openEditPopup);// edit button
 addImageOpen.addEventListener('click', fillAddForm);// add button
 popupFormEdit.addEventListener('submit', fillInfoForm);
-// popupFormAdd.addEventListener('submit', fillAddForm);

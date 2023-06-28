@@ -3,7 +3,6 @@ import { showPicture } from './index.js';
 export class Card {
 
     constructor(data, templateSelector, cardConfig) {
-
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;

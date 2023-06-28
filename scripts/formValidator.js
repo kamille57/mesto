@@ -1,7 +1,5 @@
-import { validationConfig } from './constants.js';
-
-
 export class FormValidator {
+
     constructor(validationConfig, popupForm) {
         this._form = popupForm;
         this._validationConfig = validationConfig;
@@ -60,17 +58,10 @@ export class FormValidator {
     }
 
     enableValidation() {
-        // const formList = Array.from(document.querySelectorAll(this._validationConfig.this._form));
-        // console.log(formList);
-        // formList.forEach((this._form) => {
-            this._form.addEventListener('submit', (evt) => evt.preventDefault());
-            const fieldset = this._form.querySelector(this._validationConfig.fieldSetSelector);
-            console.warn(fieldset);
-            this._setEventListeners(fieldset);
-            // fieldsetList.forEach((fieldset) => {
-            //     this._setEventListeners(fieldset);
-            // });
-        // });
+        this._form.addEventListener('submit', (evt) => evt.preventDefault());
+        const fieldset = this._form.querySelector(this._validationConfig.fieldSetSelector);
+        console.warn(fieldset);
+        this._setEventListeners(fieldset);
     }
 
     resetFormValidation() {
