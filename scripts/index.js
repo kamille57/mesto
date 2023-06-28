@@ -15,7 +15,6 @@ const profileHobby = document.querySelector('.profile-info__profession');
 // создаем галерею картинок template + user
 const addCardField = document.querySelector('#placeName');
 const addLinkField = document.querySelector('#placeLink'); // инпут ввод линка
-const addCardButton = document.querySelector('#addSaveButton'); // инпут ввод места
 
 // формы для заполнения 
 const popupFormEdit = document.querySelector('#popupEditForm');
@@ -30,8 +29,17 @@ const popupImage = document.querySelector('.popup__pic');
 const popupText = document.querySelector('.popup__text');
 const popups = document.querySelectorAll('.popup');
 
+const formValidatorEdit = new FormValidator(validationConfig, popupFormEdit);
+formValidatorEdit.enableValidation();
 
-function openPopup(popup) {
+const formValidatorAdd = new FormValidator(validationConfig, popupFormAdd);
+formValidatorAdd.enableValidation();
+
+function openPopup(popup, formValidator) {
+    if (formValidator) {
+        formValidator.resetFormValidation();
+    }
+
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handlePopupKeydown);
 };
@@ -44,10 +52,9 @@ export function showPicture(name, link) {
 };
 
 function openEditPopup() { // заполняем инпуты данными со страницы
-    openPopup(popupEdit);
+    openPopup(popupEdit, formValidatorEdit);
     popupName.value = profileName.textContent;
     popupHobby.value = profileHobby.textContent;
-    formValidatorEdit.enableValidation();
 };
 
 function fillInfoForm(evt) {  // заполнение инфо на главной странице
@@ -61,8 +68,7 @@ function fillAddForm(evt) { // форма заполнения попапа с �
     evt.preventDefault();
     addCardField.value = "";
     addLinkField.value = "";
-    formValidatorAdd.enableValidation();
-    openPopup(popupAdd);
+    openPopup(popupAdd, formValidatorAdd);
 };
 
 function closePopup(popup) {
@@ -101,11 +107,7 @@ initialCards.forEach((data) => {
     document.querySelector('.elements-container').append(cardElement);
 });
 
-const formValidatorEdit = new FormValidator(validationConfig, popupFormEdit);
-formValidatorEdit.enableValidation();
 
-const formValidatorAdd = new FormValidator(validationConfig, popupFormAdd);
-formValidatorAdd.enableValidation();
 
 popupFormAdd.addEventListener('submit', (evt) => { 
     evt.preventDefault(); 
@@ -113,16 +115,16 @@ popupFormAdd.addEventListener('submit', (evt) => {
         name: addCardField.value,
         link: addLinkField.value
     }
-    const card = new Card(cardData, '.card-template', cardConfig);   
+    const card = new Card(cardData, '.card-template', cardConfig);
     console.log(card);
     const cardElement = card.generateCard();  
     console.log(cardElement); 
-    document.querySelector('.elements-container').prepend(cardElement);  
-    closePopup(popupAdd);   
-    popupFormAdd.reset();   
+    document.querySelector('.elements-container').prepend(cardElement); 
+    closePopup(popupAdd, formValidatorAdd);   
+    popupFormAdd.reset(); 
 });
 
 buttonPopupOpen.addEventListener('click', openEditPopup);// edit button
 addImageOpen.addEventListener('click', fillAddForm);// add button
 popupFormEdit.addEventListener('submit', fillInfoForm);
-popupFormAdd.addEventListener('submit', fillAddForm);
+// popupFormAdd.addEventListener('submit', fillAddForm);
