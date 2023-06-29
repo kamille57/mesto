@@ -3,8 +3,13 @@
 ### My first steps in JavaScript
 
 * My website is based on Figma project
-* Save and Edit buttons were made with JS and work properly
-* Other interactive part (like buttons, avatar change and add button) is yet to be fixed
+* All the buttons work properly (popup edit buttons, save buttons)
+* You can like or delete cards from gallary using like or delete buttons
+* Try to add your name and link in popup add form and you could see your own card in the gallery
 * Mesto site is responsive and adaptive due to flex and grid 
+* Classes and OOP are used in JS code
+* JS code is devided into 4 files and binded due to export/import 
+* Creation of the card and validation are made with this context method
+* Functions are refactored for being more clear and universal
 
 [Please, enjoy!](https://kamille57.github.io/mesto/ "Traveller's Page")

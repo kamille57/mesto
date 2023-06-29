@@ -33,21 +33,30 @@ export class Card {
         return this._element;
     }
 
-    _setEventListeners() {
-        this._pic.addEventListener('click', () => {
-            this._handleOpenPopup();
-        });
+    _handleLikeButton() {
+        this._likeButton.classList.toggle(this._cardConfig.likeElementActiveClass);
+    }
 
-        this._likeButton.addEventListener('click', () => {
-            this._likeButton.classList.toggle(this._cardConfig.likeElementActiveClass);
-        });
-
-        this._trashButton.addEventListener('click', () => {
-            this._element.remove();
-        });
+    _handleTrashButton() {
+        this._element.remove();
     }
 
     _handleOpenPopup() {
         showPicture(this._name, this._link);
     }
+
+    _setEventListeners() {
+        this._pic.addEventListener('click', () => {
+            this._handleOpenPopup()
+        });
+
+        this._likeButton.addEventListener('click', () => {
+            this._handleLikeButton();
+        });
+
+        this._trashButton.addEventListener('click', () => {
+            this._handleTrashButton();
+        });
+    }
+
 };
