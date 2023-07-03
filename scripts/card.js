@@ -33,16 +33,16 @@ export class Card {
         return this._element;
     }
 
+    _handleOpenPopup() {
+        showPicture(this._name, this._link);
+    }
+
     _handleLikeButton() {
         this._likeButton.classList.toggle(this._cardConfig.likeElementActiveClass);
     }
 
     _handleTrashButton() {
         this._element.remove();
-    }
-
-    _handleOpenPopup() {
-        showPicture(this._name, this._link);
     }
 
     _setEventListeners() {

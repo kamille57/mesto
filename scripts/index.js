@@ -93,8 +93,7 @@ popups.forEach((popup) => {
 
 function createCard(cardData, cardTemplate, cardConfig) {
     const card = new Card(cardData, cardTemplate, cardConfig);
-    const cardElement = card.generateCard();
-    return cardElement;
+    return card.generateCard();
 }
 
 initialCards.forEach((data) => {
