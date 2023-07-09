@@ -1,17 +1,15 @@
-import { showPicture } from './index.js';
-
 export class Card {
 
-    constructor(data, templateSelector, cardConfig) {
+    constructor(data, cardConfig, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
-        this._templateSelector = templateSelector;
         this._cardConfig = cardConfig;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
         const card = document
-            .querySelector(this._templateSelector)
+            .querySelector(this._cardConfig.cardTemplate)
             .content
             .querySelector(this._cardConfig.cardElement)
             .cloneNode(true);
@@ -20,6 +18,7 @@ export class Card {
     }
 
     generateCard() {
+
         this._element = this._getTemplate();
         this._pic = this._element.querySelector(this._cardConfig.picElement);
         this._likeButton = this._element.querySelector(this._cardConfig.likeElement);
@@ -31,10 +30,7 @@ export class Card {
         this._element.querySelector(this._cardConfig.textElement).textContent = this._name;
 
         return this._element;
-    }
 
-    _handleOpenPopup() {
-        showPicture(this._name, this._link);
     }
 
     _handleLikeButton() {
@@ -45,9 +41,10 @@ export class Card {
         this._element.remove();
     }
 
+
     _setEventListeners() {
         this._pic.addEventListener('click', () => {
-            this._handleOpenPopup()
+            this._handleCardClick(this._pic.src, this._pic.alt);
         });
 
         this._likeButton.addEventListener('click', () => {
