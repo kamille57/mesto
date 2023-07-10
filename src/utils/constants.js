@@ -4,13 +4,6 @@ export const popupFormEdit = document.querySelector('#popupEditForm');
 export const popupFormAdd = document.querySelector('#popupAddForm');
 export const buttonPopupOpen = document.querySelector('.profile-info__edit-button');
 export const addImageOpen = document.querySelector('.profile-info__add-button');
-export const popupOpenImage = new PopupWithImage('.popup_type_show-pic');
-export const userInfo = new UserInfo({
-  nameSelector: '.profile-info__name',
-  aboutSelector: '.profile-info__profession' 
-});
-
-
 
 export const cardConfig = {
   cardTemplate: '.card-template',
@@ -61,6 +54,3 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-import { UserInfo } from './userInfo.js';
-import { PopupWithImage } from './popupWithImage.js';

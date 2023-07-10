@@ -1,4 +1,4 @@
-export class Popup {
+export default class Popup {
 
     constructor(templateSelector) { 
         this._templateSelector = templateSelector; 
@@ -37,4 +37,3 @@ export class Popup {
         document.removeEventListener('keydown', this._handleEscClose);
     }
 }
-

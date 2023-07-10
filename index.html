@@ -1,97 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Страница про путешествия">
-  <meta name="keywords" content="Профиль путешественника, путешествия, фотографии мест">
-  <meta name="author" content="kamille_57">
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="pages/index.css">
-  <title>Страница путешественника</title>
-</head>
-
-<body class="page">
-
-  <header class="header">
-    <img class="header__logo" src="images/logo.svg" alt="Логотип сайта.">
-  </header>
-
-  <main class="content">
-    <section class="profile">
-      <div class="profile-info">
-        <img class="profile-info__avatar" src="images/avatar.jpg" alt="Ваш аватар.">
-        <h1 class="profile-info__name">Жак-Ив Кусто</h1>
-        <button type="button" aria-label="кнопка открытия попапа с информацией о профиле" class="profile-info__edit-button"></button>
-        <p class="profile-info__profession">Исследователь океана</p>
-        <button type="button" aria-label="кнопка открытия попапа для добавления карточек" class="profile-info__add-button"></button>
-      </div>
-    </section>
-    <section class="elements-container">
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p class="footer__copyright"> &copy; 2023 Mesto Russia</p>
-  </footer>
-
-  <div class="popup popup_type_add-pic" id="popupAdd">
-    <div class="popup__container">
-      <button type="button" aria-label="кнопка закрытия попапа добавления картинки" class="popup__closed" id="addClose"></button>
-      <form class="popup-form" method="post" action="#" id="popupAddForm" name="ProfileAdd" novalidate>
-        <fieldset class="popup-form__set">
-          <h2 class="popup-form__heading">Новое место</h2>
-          <input type="text" class="popup__input" name="name" placeholder="Название" id="placeName" minlength="2"
-            maxlength="30" required>
-          <span id="placeName-error" class="error error_invalid"></span>
-          <input type="url" class="popup__input" name="link" placeholder="Ссылка на картинку" id="placeLink"
-            required>
-          <span id="placeLink-error" class="error error_invalid"></span>
-          <button type="submit" aria-label="кнопка сохранения пользовательской карточки в галерею" class="popup-form__save-button popup-form__save-button_valid"
-            id="addSaveButton">Создать</button>
-        </fieldset>
-      </form>
-    </div>
-  </div>
-
-  <div class="popup popup_type_profile-edit" id="popupEdit">
-    <div class="popup__container">
-      <button type="button" aria-label="кнопка закрытия попапа редактирования профиля" class="popup__closed" id="editClose"></button>
-      <form class="popup-form" method="post" action="#" id="popupEditForm" name="ProfileEdit" novalidate>
-        <fieldset class="popup-form__set">
-          <h2 class="popup-form__heading">Редактировать профиль</h2>
-          <input type="text" class="popup__input" name="name" placeholder="Введите свое имя" id="name" minlength="2"
-            maxlength="40" required>
-          <span id="name-error" class="error error_invalid"></span>
-          <input type="text" class="popup__input" name="about" placeholder="О себе" id="hobby" minlength="2"
-            maxlength="200" required>
-          <span id="hobby-error" class="error error_invalid"></span>
-          <button type="submit" aria-label="кнопка сохранения информации профиля" class="popup-form__save-button popup-form__save-button_valid">Сохранить</button>
-        </fieldset>
-      </form>
-    </div>
-  </div>
-
-  <div class="popup popup_type_show-pic" id="popupCard">
-    <div class="popup__container">
-      <button type="button" aria-label="кнопка закрытия попапа с развернутым изображением" class="popup__closed" id="cardClose"></button>
-      <figure class="popup__figure">
-        <img class="popup__pic">
-        <figcaption class="popup__text"></figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <template class="card-template" id="template-cards">
-    <article class="element">
-      <img class="element__pic">
-      <h3 class="element__text"></h3>
-      <button type="button" class="element__trash" aria-label="Корзина"></button>
-      <button type="button" class="element__like" aria-label="Лайк"></button>
-    </article>
-  </template>
-
-  <script type="module" src="scripts/index.js"></script>
-</body>
-
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Webpack App</title>
+    </head>
+    <body>
+        <h1>Hello world!</h1>
+        <h2>Tip: Check your console</h2>
+    </body>
+    
 </html>

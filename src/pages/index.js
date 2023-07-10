@@ -1,19 +1,30 @@
-import { FormValidator } from './formValidator.js';
-import { cardConfig, 
-         validationConfig, 
-         initialCards, 
-         popupName, 
-         popupHobby, 
-         popupFormEdit, 
-         popupFormAdd,
-         buttonPopupOpen,
-         popupOpenImage,
-         userInfo,
-         addImageOpen
-        } from './constants.js';
-import { Card } from './card.js';
-import { Section } from './section.js';
-import { PopupWithForm } from './popupWithForm.js';
+import './index.css'
+
+import FormValidator from '../components/FormValidator.js';
+
+import {
+    cardConfig,
+    validationConfig,
+    initialCards,
+    popupName,
+    popupHobby,
+    popupFormEdit,
+    popupFormAdd,
+    buttonPopupOpen,
+    addImageOpen
+} from '../utils/constants.js';
+
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+
+const popupOpenImage = new PopupWithImage('.popup_type_show-pic');
+const userInfo = new UserInfo({
+    nameSelector: '.profile-info__name',
+    aboutSelector: '.profile-info__profession'
+});
 
 const formValidatorEdit = new FormValidator(validationConfig, popupFormEdit);
 formValidatorEdit.enableValidation();
@@ -39,8 +50,8 @@ defaultCards.renderItems();
 
 const popupWithFormEdit = new PopupWithForm('.popup_type_profile-edit', () => {
     userInfo.setUserInfo({
-      name: popupName.value, 
-      about: popupHobby.value
+        name: popupName.value,
+        about: popupHobby.value
     });
     popupWithFormEdit.close();
 });
@@ -54,12 +65,12 @@ const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
 });
 popupWithFormAdd.setEventListeners();
 
-buttonPopupOpen.addEventListener('click', () => { 
+buttonPopupOpen.addEventListener('click', () => {
     const { name, about } = userInfo.getUserInfo();
     popupName.value = name;
     popupHobby.value = about;
     formValidatorEdit.resetFormValidation();
-    popupWithFormEdit.open(); 
+    popupWithFormEdit.open();
 });
 
 addImageOpen.addEventListener('click', function (evt) {
