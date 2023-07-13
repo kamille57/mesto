@@ -48,14 +48,14 @@ const config = {
             }, 'postcss-loader'],
             },
             {
-                test: /\.(eot|svg|png|jpg|gif)$/i,
+                test: /\.(svg|png|jpg|gif)$/i,
                 type: 'asset',
                 generator : {
                     filename : 'images/[name][ext][query]',
                   }
             },
             {
-                test: /\.(ttf|woff|woff2)$/i,
+                test: /\.(eot|ttf|woff|woff2)$/i,
                 type: 'asset',
                 generator : {
                     filename : 'fonts/[name][ext][query]',
