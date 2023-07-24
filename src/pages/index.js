@@ -62,8 +62,7 @@ cardsList.renderItems();
 const popupWithFormEdit = new PopupWithForm('.popup_type_profile-edit', (data) => {
   userInfo.setUserInfo({
     name: data.name,
-    about: data.about
-    
+    about: data.about,
   });
   popupWithFormEdit.close();
 });
@@ -99,31 +98,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     // Установка информации о пользователе на страницу
     userInfo.setUserInfo(userInfoData);
-
+    userInfo.setUserAvatar(userInfoData.avatar)
     initialCardsData.forEach(card => {
       const cardElement = createCard(card);
       cardsList.addItem(cardElement);
     });
-  });
-
-addImageOpen.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  formValidatorAdd.resetFormValidation();
-  popupWithFormAdd.open();
-});
-
-
-
-Promise.all([api.getUserInfo(), api.getInitialCards()]) 
-  .then(([userInfoData, initialCardsData]) => { 
-    console.log('Информация о пользователе:', userInfoData); 
-    console.log('Начальные карточки:', initialCardsData); 
- 
-    initialCardsData.forEach(card => { 
-      const cardElement = createCard(card); 
-      cardsList.addItem(cardElement); 
-    }); 
- 
     const cardId = 'cardId'; // Replace with the actual card ID 
     api.deleteCard(cardId) 
       .then(response => { 
@@ -133,3 +112,10 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         console.error('Ошибка при удалении карточки:', error); 
       }); 
   });
+
+addImageOpen.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  formValidatorAdd.resetFormValidation();
+  popupWithFormAdd.open();
+});
+

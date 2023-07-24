@@ -19,10 +19,12 @@
   <main class="content">
     <section class="profile">
       <div class="profile-info">
-        <img class="profile-info__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Ваш аватар.">
+        <img class="profile-info__avatar" alt="Ваш аватар.">
         <h1 class="profile-info__name"></h1>
         <button type="button" aria-label="кнопка открытия попапа с информацией о профиле"
           class="profile-info__edit-button"></button>
+          <button type="button" aria-label="кнопка открытия аватара"
+          class="profile-info__edit-avatar-button"></button>
         <p class="profile-info__profession"></p>
         <button type="button" aria-label="кнопка открытия попапа для добавления карточек"
           class="profile-info__add-button"></button>
@@ -66,7 +68,7 @@
             minlength="2" maxlength="30" required>
           <span id="avatarLink-error" class="error error_invalid"></span>
           <button type="submit" aria-label="кнопка сохранения пользовательского аватара"
-            class="popup-form__update-avatar-button popup-form__update-avatar-button_valid"
+            class="popup-form__save-button popup-form__save-button_valid"
             id="updateAvatarButton">Сохранить</button>
         </fieldset>
       </form>
