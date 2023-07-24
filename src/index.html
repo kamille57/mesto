@@ -20,10 +20,10 @@
     <section class="profile">
       <div class="profile-info">
         <img class="profile-info__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Ваш аватар.">
-        <h1 class="profile-info__name">Жак-Ив Кусто</h1>
+        <h1 class="profile-info__name"></h1>
         <button type="button" aria-label="кнопка открытия попапа с информацией о профиле"
           class="profile-info__edit-button"></button>
-        <p class="profile-info__profession">Исследователь океана</p>
+        <p class="profile-info__profession"></p>
         <button type="button" aria-label="кнопка открытия попапа для добавления карточек"
           class="profile-info__add-button"></button>
       </div>
@@ -50,6 +50,24 @@
           <span id="placeLink-error" class="error error_invalid"></span>
           <button type="submit" aria-label="кнопка сохранения пользовательской карточки в галерею"
             class="popup-form__save-button popup-form__save-button_valid" id="addSaveButton">Создать</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_update-avatar" id="popupAvatar">
+    <div class="popup__container">
+      <button type="button" aria-label="кнопка закрытия попапа обновления аватара" class="popup__closed"
+        id="avatarClose"></button>
+      <form class="popup-form" method="post" action="#" id="popupAdvatarUpdate" name="AvatarUpdate" novalidate>
+        <fieldset class="popup-form__set">
+          <h2 class="popup-form__heading">Обновить аватар</h2>
+          <input type="url" class="popup__input" name="avatar-link" placeholder="Ссылка на новый аватар" id="avatarLink"
+            minlength="2" maxlength="30" required>
+          <span id="avatarLink-error" class="error error_invalid"></span>
+          <button type="submit" aria-label="кнопка сохранения пользовательского аватара"
+            class="popup-form__update-avatar-button popup-form__update-avatar-button_valid"
+            id="updateAvatarButton">Сохранить</button>
         </fieldset>
       </form>
     </div>
