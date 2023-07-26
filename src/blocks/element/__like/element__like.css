@@ -1,8 +1,8 @@
 .element__like {
-  margin: auto 20px 37px auto;
+  margin: 22px 20px 0 0;
   padding: 0;
-  min-width: 22px;
-  min-height: 19px;
+  width: 22px;
+  height: 19px;
   background-image: url(../../../images/Like.svg);
   background-size: cover;
   background-repeat: no-repeat;

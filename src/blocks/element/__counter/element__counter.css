@@ -1,0 +1,7 @@
+.element__counter {
+    margin: 0 27px 22px auto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    grid-column-start: 2;
+}
