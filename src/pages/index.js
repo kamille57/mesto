@@ -57,31 +57,22 @@ function handleCardClick(link, title) {
 
 popupWithImage.setEventListeners();
 
-function createCard(item) {
-  const apiObj = {
-    like: (id) => api.likeCard(id),
-    dislike:  (id) => api.dislikeCard(id),
+function createCard(data, currentUserId) { 
+  const apiObj = { 
+    like: (id) => api.likeCard(id), 
+    dislike:  (id) => api.dislikeCard(id), 
     delete:  (id) => api.deleteCard(id),
-    test: (name) => {
-      console.log('Hello' + name)
-    }
-  }
-
-
-
-  const card = new Card(item, cardConfig, handleCardClick, apiObj);
-
-  // card.then(res => {
-  //   card.setCardLikes(res.likes)
-  // })
-  // console.log(currentUserId);
-  return card.generateCard();
+    isOwner: (data, currentUserId) => checkOwner(data, currentUserId)
+  } 
+ 
+  const card = new Card(data, cardConfig, handleCardClick, apiObj, currentUserId);   
+ 
+  return card.generateCard(); 
 }
 
 
-
 const cardsList = new Section({
-  items: [], // Provide initialCards array here
+  items: [], 
   renderer: createCard
 }, '.elements-container');
 cardsList.renderItems();
@@ -99,26 +90,25 @@ popupWithFormEdit.setEventListeners();
 
 const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
   console.log(data);
-  const cardElement = createCard(data);
+  const cardElement = createCard(data, true);
   cardsList.addItem(cardElement);
   api.addCard(data);
   popupWithFormAdd.close();
 });
 popupWithFormAdd.setEventListeners();
 
-const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {   // перенести в блок then установку аватара
-  console.log('data со строки 103:', data)
-
-    .then(() => {  
-      api.updateUserAvatar(data)  
-
-      popupWithFormAvatar.close();  
-    })  
-    .catch((error) => {  
-      console.error('Ошибка при обновлении аватара:', error);  
-    });  
-});
-
+const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {   
+  console.log('data со строки 103:', data) 
+  api.updateUserAvatar(data)   
+    .then((res) => {   
+      userInfo.setUserAvatar(res.avatar);
+      popupWithFormAvatar.close();   
+    })   
+    .catch((error) => {   
+      console.error('Ошибка при обновлении аватара:', error);   
+    });   
+}); 
+ 
 popupWithFormAvatar.setEventListeners();
 
 buttonAvatarOpen.addEventListener('click', () => { 
