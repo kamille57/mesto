@@ -71,7 +71,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this._headers,
-      body: JSON.stringify()
+      //body: JSON.stringify()
     })
       .then(this._checkResponse);
   }

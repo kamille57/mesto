@@ -58,21 +58,27 @@ function handleCardClick(link, title) {
 popupWithImage.setEventListeners();
 
 function createCard(item) {
-  const card = new Card(item, cardConfig, handleCardClick, handleDeleteClick);
+  const apiObj = {
+    like: (id) => api.likeCard(id),
+    dislike:  (id) => api.dislikeCard(id),
+    delete:  (id) => api.deleteCard(id),
+    test: (name) => {
+      console.log('Hello' + name)
+    }
+  }
 
+
+
+  const card = new Card(item, cardConfig, handleCardClick, apiObj);
+
+  // card.then(res => {
+  //   card.setCardLikes(res.likes)
+  // })
+  // console.log(currentUserId);
   return card.generateCard();
 }
 
-function handleDeleteClick(card) {
-  const cardId = card.getCardId();
-  api.deleteCard(cardId)
-    .then(() => {
-      
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
+
 
 const cardsList = new Section({
   items: [], // Provide initialCards array here
@@ -92,18 +98,20 @@ const popupWithFormEdit = new PopupWithForm('.popup_type_profile-edit', (data) =
 popupWithFormEdit.setEventListeners();
 
 const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
+  console.log(data);
   const cardElement = createCard(data);
   cardsList.addItem(cardElement);
+  api.addCard(data);
   popupWithFormAdd.close();
 });
 popupWithFormAdd.setEventListeners();
 
-const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {   
+const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {   // перенести в блок then установку аватара
   console.log('data со строки 103:', data)
 
-  api.updateUserAvatar(data)  
     .then(() => {  
-      userInfo.setUserAvatar(data.avatar);
+      api.updateUserAvatar(data)  
+
       popupWithFormAvatar.close();  
     })  
     .catch((error) => {  
@@ -138,9 +146,10 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     // Установка информации о пользователе на страницу
     userInfo.setUserInfo(userInfoData);
     userInfo.setUserAvatar(userInfoData.avatar);
+    const currentUserId = userInfoData._id
     console.log('аватар:', userInfoData.avatar);
     initialCardsData.forEach(card => {
-      const cardElement = createCard(card);
+      const cardElement = createCard(card, currentUserId);
       cardsList.addItem(cardElement);
     });
   });
@@ -150,3 +159,5 @@ addImageOpen.addEventListener('click', function (evt) {
   formValidatorAdd.resetFormValidation();
   popupWithFormAdd.open();
 });
+
+
