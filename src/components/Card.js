@@ -40,11 +40,10 @@ export default class Card {
     this._pic.alt = this._name;
     this._element.querySelector(this._cardConfig.textElement).textContent = this._name;
 
-    if (this._ownerId !== this._currentUserId) {
+   
       this._hideTrashButton();
-    }
-
-    // Установка активного состояния кнопки лайка, если карточка уже была лайкнута владельцем
+    
+    // Установка активного состояния кнопки лайка, если карточка уже была лайкнута юзером
     if (this._isLikedByOwner) {
       this._likeButton.classList.add(this._cardConfig.likeElementActiveClass);
     }
@@ -61,11 +60,16 @@ export default class Card {
 
 
   _hideTrashButton() {
+    if (this._ownerId !== this._currentUserId) {
     this._trashButton.classList.add(this._cardConfig.trashElementInvisibleClass);
     this._trashButton.classList.remove(this._cardConfig.trashElementClass);
-  }
+  }}
 
-  _setCardLikes(likes) {
+  removeCard() {  
+    this._element.remove();  
+  }  
+
+  setCardLikes(likes) {
     this._likes = likes;
     this._updateLikesCount();
     this._isLikedByOwner = this._likes.some((like) => like._id === this._currentUserId);
@@ -79,7 +83,7 @@ export default class Card {
       this._likeCount.textContent = 0;
     }
   }
- 
+
   _setEventListeners() {
     this._pic.addEventListener("click", () => {
       this._handleCardClick(this._link, this._name);
@@ -90,30 +94,14 @@ export default class Card {
     });
 
     this._trashButton.addEventListener("click", () => { 
-      console.log(this._element);
-    
-      this._openConfirmPopup(() => {
-        console.log('click'); 
-        this.deleteCard(this._cardId)
-        
-          .then(() => {
-            console.log('click'); 
-
-            this._element.remove();
-          })
-          .catch((err) => console.log(err));
-      });
+      this.deleteCard(this._cardId)
     });
 
     this._likeButton.addEventListener("click", () => {
       if (this._isLikedByOwner) {
         this.dislikeCard(this._cardId)
-          .then((res) => {
-            this._setCardLikes(res.likes);
-          });
       } else {
-        this.likeCard(this._cardId)
-          .then((res) => this._setCardLikes(res.likes));
+        this.likeCard(this._cardId);
       }
     });
   }

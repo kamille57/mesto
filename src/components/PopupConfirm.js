@@ -10,7 +10,7 @@ export default class PopupConfirm extends Popup {
   setConfirmCallback(confirmCallback) {
     this._confirmCallback = confirmCallback;
   }
-  
+
   _handleConfirm() {
     if (this._confirmCallback) {
       this._confirmCallback();

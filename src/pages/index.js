@@ -50,17 +50,47 @@ const formValidatorAvatar = new FormValidator(validationConfig, popupFormAvatar)
 formValidatorAvatar.enableValidation();
 
 function createCard(data, currentUserId) {
-  const apiObj = {
-    like: (id) => api.likeCard(id),
-    dislike: (id) => api.dislikeCard(id),
-    delete: (id) => api.deleteCard(id)
-  }
-
   const handleCardClick = (link, title) => {
     popupWithImage.open(link, title);
-  }
+  };
 
-  const card = new Card(data, cardConfig, handleCardClick, apiObj, currentUserId, popupConfirm.open.bind(popupConfirm));
+  const handleDeleteCard = (card) => {
+    console.log(card);
+    card.removeCard();
+  };
+
+  const popupConfirm = new PopupConfirm('.popup_type_delete-confirm', handleDeleteCard);
+  popupConfirm.setEventListeners();
+
+  const apiObj = {
+    like: (id) => {
+      api.likeCard(id)
+        .then((res) => {
+          card.setCardLikes(res.likes);
+        })
+        .catch((err) => console.log(err));
+    },
+    dislike: (id) => {
+      api.dislikeCard(id)
+        .then((res) => {
+          card.setCardLikes(res.likes);
+        })
+        .catch((err) => console.log(err))
+    },
+    delete: (id) => {
+      popupConfirm.setConfirmCallback(() => {
+        api.deleteCard(id)
+          .then(() => {
+            popupConfirm.close();
+            handleDeleteCard(card);
+          })
+          .catch((err) => console.log(err));
+      });
+      popupConfirm.open(handleDeleteCard.bind(null, card));
+    }
+  };
+
+  const card = new Card(data, cardConfig, handleCardClick, apiObj, currentUserId);
 
   return card.generateCard();
 }
@@ -105,12 +135,6 @@ const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
 });
 popupWithFormAdd.setEventListeners();
 
-
-const popupConfirm = new PopupConfirm('.popup_type_delete-confirm');
-popupConfirm.setConfirmCallback(() => {
-  console.log('Submit button clicked');  
-});
-popupConfirm.setEventListeners();
 
 const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {
   api.updateUserAvatar(data)
