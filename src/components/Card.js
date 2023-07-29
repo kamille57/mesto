@@ -10,7 +10,7 @@ export default class Card {
     this.likeCard = apiObj.like;
     this.dislikeCard = apiObj.dislike;
     this.deleteCard = apiObj.delete;
-    
+
     if (data.owner) {
       this._ownerId = data.owner._id;
     }
@@ -59,6 +59,12 @@ export default class Card {
     this._likeButton.classList.toggle(this._cardConfig.likeElementActiveClass);
   }
 
+
+  _hideTrashButton() {
+    this._trashButton.classList.add(this._cardConfig.trashElementInvisibleClass);
+    this._trashButton.classList.remove(this._cardConfig.trashElementClass);
+  }
+
   _setCardLikes(likes) {
     this._likes = likes;
     this._updateLikesCount();
@@ -73,16 +79,7 @@ export default class Card {
       this._likeCount.textContent = 0;
     }
   }
-
-  _hideTrashButton() {
-    this._trashButton.classList.add(this._cardConfig.trashElementInvisibleClass);
-    this._trashButton.classList.remove(this._cardConfig.trashElementClass);
-  }
-
-  _removeCard() {
-    this._element.remove();
-  }
-
+ 
   _setEventListeners() {
     this._pic.addEventListener("click", () => {
       this._handleCardClick(this._link, this._name);
@@ -93,16 +90,30 @@ export default class Card {
     });
 
     this._trashButton.addEventListener("click", () => { 
-      this._openConfirmPopup(); // вызываем метод _openConfirmPopup при клике на кнопку корзины
+      console.log(this._element);
+    
+      this._openConfirmPopup(() => {
+        console.log('click'); 
+        this.deleteCard(this._cardId)
+        
+          .then(() => {
+            console.log('click'); 
+
+            this._element.remove();
+          })
+          .catch((err) => console.log(err));
+      });
     });
 
     this._likeButton.addEventListener("click", () => {
       if (this._isLikedByOwner) {
-        this.dislikeCard(this._cardId).then((res) => {
-          this._setCardLikes(res.likes);
-        });
+        this.dislikeCard(this._cardId)
+          .then((res) => {
+            this._setCardLikes(res.likes);
+          });
       } else {
-        this.likeCard(this._cardId).then((res) => this._setCardLikes(res.likes));
+        this.likeCard(this._cardId)
+          .then((res) => this._setCardLikes(res.likes));
       }
     });
   }

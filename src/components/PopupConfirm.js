@@ -1,15 +1,16 @@
 import Popup from '../components/Popup.js';
 
 export default class PopupConfirm extends Popup {
-  constructor(templateSelector) {
+  constructor(templateSelector, callbackDeleteSubmit) {
     super(templateSelector);
+    this._callbackDeleteSubmit = callbackDeleteSubmit;
     this._submitButton = this._popup.querySelector('.popup-form__save-button');
   }
 
   setConfirmCallback(confirmCallback) {
     this._confirmCallback = confirmCallback;
   }
-
+  
   _handleConfirm() {
     if (this._confirmCallback) {
       this._confirmCallback();
@@ -31,5 +32,10 @@ export default class PopupConfirm extends Popup {
       evt.preventDefault();
       this._handleConfirm();
     });
+  }
+
+  open(deleteCardCallback) {
+    this._confirmCallback = deleteCardCallback;
+    super.open();
   }
 }

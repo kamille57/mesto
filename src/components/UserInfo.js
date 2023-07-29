@@ -9,17 +9,13 @@ export default class UserInfo {
       const name = this._nameElement.textContent;
       const about = this._aboutElement.textContent;
       const userId = this._userId;
-      console.log(this._userId);
-      console.log({ name, about, userId });
       return { name, about, userId };
     }
   
     setUserInfo({name, about, _id}) {
-      console.warn('set user info');
       this._nameElement.textContent = name;
       this._aboutElement.textContent = about;
       this._userId = _id;
-      console.log(this._userId);
     }
 
     getUserAvatar() {
@@ -29,7 +25,6 @@ export default class UserInfo {
 
     setUserAvatar(avatar) {
       this._avatarElement.src = avatar;
-      console.log(avatar);
     }
 
   }

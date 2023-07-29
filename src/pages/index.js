@@ -16,8 +16,6 @@ import {
   addImageOpen,
   buttonAvatarOpen,
   popupFormAvatar,
-  likeButtonElement,
-  likeButtonElementActive
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
@@ -55,26 +53,12 @@ function createCard(data, currentUserId) {
   const apiObj = {
     like: (id) => api.likeCard(id),
     dislike: (id) => api.dislikeCard(id),
-    delete: (id) => {
-      popupConfirm.setConfirmCallback(() => {
-        api.deleteCard(id)
-          .then(() => {
-            popupConfirm.close();
-            card.deleteCard();
-          })
-          .catch((err) => console.log(err));
-      });
-      popupConfirm.open();
-    }
+    delete: (id) => api.deleteCard(id)
   }
 
   const handleCardClick = (link, title) => {
     popupWithImage.open(link, title);
   }
-
-  const handleDeleteClick = (id) => {
-    apiObj.delete(id);
-  };
 
   const card = new Card(data, cardConfig, handleCardClick, apiObj, currentUserId, popupConfirm.open.bind(popupConfirm));
 
@@ -103,6 +87,7 @@ const popupWithFormEdit = new PopupWithForm('.popup_type_profile-edit', (data) =
       console.log(error);
     });
 });
+
 popupWithFormEdit.setEventListeners();
 
 const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
@@ -120,7 +105,11 @@ const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
 });
 popupWithFormAdd.setEventListeners();
 
+
 const popupConfirm = new PopupConfirm('.popup_type_delete-confirm');
+popupConfirm.setConfirmCallback(() => {
+  console.log('Submit button clicked');  
+});
 popupConfirm.setEventListeners();
 
 const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {

@@ -82,3 +82,21 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-71/cards', {
         });
     });
   });
+
+  this.deleteCard(this._cardId) // this.deleteCard = apiObj.delete;
+        .then(() => {   
+          this._element.remove();    
+        })   
+        .catch((error) => {   
+          console.log(error);   
+        });   
+
+        popupConfirm.setConfirmCallback(() => {
+          this.deleteCard(this._cardId)
+            .then(() => {
+              popupConfirm.close();
+              card.deleteCard();
+            })
+            .catch((err) => console.log(err));
+        });
+        popupConfirm.open();
