@@ -1,19 +1,23 @@
 export default class Card { 
-  constructor(data, cardConfig, handleCardClick, apiObj, currentUserId) { 
+  constructor(data, cardConfig, handleCardClick, apiObj, currentUserId, handleTrashClick) { 
+    console.log(currentUserId);
     this._name = data.name; 
     this._link = data.link; 
     this._cardId = data._id; 
     this._cardConfig = cardConfig; 
     this._handleCardClick = handleCardClick; 
+    this._handleTrashClick = handleTrashClick; 
     this._currentUserId = currentUserId; 
     this.likeCard = apiObj.like; 
     this.dislikeCard = apiObj.dislike; 
     this.deleteCard = apiObj.delete; 
- 
+
+    // Проверка наличия владельца карточки
     if (data.owner) { 
       this._ownerId = data.owner._id; 
-    } 
- 
+    }
+    
+    // Проверка наличия лайков
     if (data.likes) { 
       this._isLikedByOwner = data.likes.some((like) => like._id === this._currentUserId); 
       this._likes = data.likes; 
@@ -26,26 +30,34 @@ export default class Card {
     return card; 
   } 
  
-  generateCard() { 
+  generateCard() {
+    // Генерация карточки и добавление обработчиков событий
     this._element = this._getTemplate(); 
     this._pic = this._element.querySelector(this._cardConfig.picElement); 
     this._likeButton = this._element.querySelector(this._cardConfig.likeElement); 
-    this._trashButton = this._element.querySelector(this._cardConfig.trashElementInvisibleClass); 
+    this._trashButton = this._element.querySelector(this._cardConfig.trashElement); 
     this._likeCount = this._element.querySelector(this._cardConfig.likeCountElement); 
     this._setEventListeners(); 
  
+    // Установка данных карточки из объекта data
     this._pic.src = this._link; 
     this._pic.alt = this._name; 
     this._element.querySelector(this._cardConfig.textElement).textContent = this._name; 
- 
-    if (this._ownerId === this._currentUserId) { 
-      this._showTrashButton(); 
+    
+    // Скрытие кнопки удаления, если пользователь не является владельцем карточки
+    console.log(this._ownerId);
+    console.log(this._currentUserId);
+    console.log(this._ownerId !== this._currentUserId);
+    if (this._ownerId !== this._currentUserId) { 
+      this._hideTrashButton(); 
     } 
  
+    // Установка активного состояния кнопки лайка, если карточка уже была лайкнута владельцем
     if (this._isLikedByOwner) { 
       this._likeButton.classList.add(this._cardConfig.likeElementActiveClass); 
     } 
  
+    // Обновление количества лайков
     this._updateLikesCount(); 
  
     return this._element; 
@@ -55,12 +67,16 @@ export default class Card {
     this._likeButton.classList.toggle(this._cardConfig.likeElementActiveClass); 
   } 
  
-  _setCardLikes(likes) { 
+  _setCardLikes(likes) {
+    console.log(likes); 
     this._likes = likes; 
     this._updateLikesCount(); 
+    this._isLikedByOwner = this._likes.some((like) => like._id === this._currentUserId); 
   } 
  
   _updateLikesCount() { 
+    console.log(this._likes.slice());
+    // Проверка наличия лайков
     if (this._likes) { 
       this._likeCount.textContent = this._likes.length; 
     } else { 
@@ -68,16 +84,12 @@ export default class Card {
     } 
   } 
  
-  _handleTrashButton() { 
-    this.removeCard(); 
+  _hideTrashButton() { 
+    this._trashButton.classList.add(this._cardConfig.trashElementInvisibleClass); 
+    this._trashButton.classList.remove(this._cardConfig.trashElementClass); 
   } 
  
-  _showTrashButton() { 
-    this._trashButton.classList.add(this._cardConfig.trashElement); 
-  } 
- 
-  removeCard() { 
-    console.log("remove card!!"); 
+  _removeCard() { 
     this._element.remove(); 
   } 
  
@@ -90,29 +102,30 @@ export default class Card {
       this._handleLikeButton(); 
     }); 
  
-     
     this._trashButton.addEventListener("click", () => { 
-      console.log(this._cardId); 
-      console.log(this._currentUserId); 
-      this.deleteCard(this._cardId) 
+      console.log('open confirm popup here');
+
+      this._handleTrashClick(()=> {
+        this.deleteCard(this._cardId) 
         .then((res) => { 
-          if (res.message === "Карточка успешно удалена") { 
-            this._handleTrashButton(); 
-          } else { 
-            console.error("Ошибка при удалении карточки"); 
-          } 
+          this._removeCard(res._id); 
         }) 
         .catch((error) => { 
           console.error("Произошла ошибка при удалении карточки:", error); 
         }); 
+      });
+
+      
     }); 
  
     this._likeButton.addEventListener("click", () => { 
       if (this._isLikedByOwner) { 
+        console.log('Dislike this');
         this.dislikeCard(this._cardId).then((res) => { 
           this._setCardLikes(res.likes); 
         }); 
       } else { 
+        console.log('Like this');
         this.likeCard(this._cardId).then((res) => this._setCardLikes(res.likes)); 
       } 
     }); 

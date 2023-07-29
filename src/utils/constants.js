@@ -18,7 +18,8 @@ export const cardConfig = {
   textElement: '.element__text',
   likeElement: '.element__like',
   trashElement: '.element__trash',
-  trashElementInvisibleClass: '.element__trash_invisible',
+  trashElementClass: 'element__trash',
+  trashElementInvisibleClass: 'element__trash_invisible',
   likeElementActiveClass: 'element__like_active',
   likeCountElement: '.element__counter'
 };

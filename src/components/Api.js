@@ -50,6 +50,8 @@ export default class Api {
       .then(this._checkResponse);
   }
 
+
+
   addCard(data) { //Добавление новой карточки
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',

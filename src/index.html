@@ -106,11 +106,25 @@
     </div>
   </div>
 
+  <div class="popup popup_type_delete-confirm" id="popupDeleteConfirm">
+    <div class="popup__container">
+      <button type="button" aria-label="кнопка закрытия попапа подтверждения удаления" class="popup__closed"
+        id="deleteClose"></button>
+      <form class="popup-form" method="post" action="#" id="formDeleteConfirm" name="DeleteConfirm" novalidate>
+        <fieldset class="popup-form__set">
+          <h2 class="popup-form__heading">Вы уверены?</h2>
+          <button type="submit" aria-label="кнопка подтверждения удаления карточки"
+            class="popup-form__save-button popup-form__save-button_valid">Да</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
   <template class="card-template" id="template-cards">
     <article class="element">
       <img class="element__pic">
       <h3 class="element__text"></h3>
-      <button type="button" class="element__trash_invisible" aria-label="Корзина"></button>
+      <button type="button" class="element__trash" aria-label="Корзина"></button>
       <button type="button" class="element__like" aria-label="Лайк"></button>
       <div class="element__counter"></div>
     </article>
