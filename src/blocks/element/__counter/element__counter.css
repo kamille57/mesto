@@ -1,7 +1,9 @@
 .element__counter {
-    margin: auto;
+    margin: 0 auto;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
-    grid-column-start: 2;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
 }
