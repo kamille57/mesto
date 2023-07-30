@@ -3,6 +3,7 @@ import Popup from '../components/Popup.js';
 export default class PopupConfirm extends Popup {
   constructor(templateSelector, callbackDeleteSubmit) {
     super(templateSelector);
+
     this._callbackDeleteSubmit = callbackDeleteSubmit;
     this._submitButton = this._popup.querySelector('.popup-form__save-button');
   }
@@ -16,14 +17,6 @@ export default class PopupConfirm extends Popup {
       this._confirmCallback();
     }
     this.close();
-  }
-
-  setLoading() {
-    this._submitButton.value = 'Сохранение...';
-  }
-
-  unsetLoading(text) {
-    this._submitButton.value = text;
   }
 
   setEventListeners() {

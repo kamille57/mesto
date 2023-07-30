@@ -23,8 +23,7 @@
         <h1 class="profile-info__name"></h1>
         <button type="button" aria-label="кнопка открытия попапа с информацией о профиле"
           class="profile-info__edit-button"></button>
-          <button type="button" aria-label="кнопка открытия аватара"
-          class="profile-info__edit-avatar-button"></button>
+        <button type="button" aria-label="кнопка открытия аватара" class="profile-info__edit-avatar-button"></button>
         <p class="profile-info__profession"></p>
         <button type="button" aria-label="кнопка открытия попапа для добавления карточек"
           class="profile-info__add-button"></button>
@@ -68,8 +67,7 @@
             minlength="2" required>
           <span id="avatarLink-error" class="error error_invalid"></span>
           <button type="submit" aria-label="кнопка сохранения пользовательского аватара"
-            class="popup-form__save-button popup-form__save-button_valid"
-            id="updateAvatarButton">Сохранить</button>
+            class="popup-form__save-button popup-form__save-button_valid" id="updateAvatarButton">Сохранить</button>
         </fieldset>
       </form>
     </div>
@@ -125,8 +123,10 @@
       <img class="element__pic">
       <h3 class="element__text"></h3>
       <button type="button" class="element__trash" aria-label="Корзина"></button>
-      <button type="button" class="element__like" aria-label="Лайк"></button>
-      <div class="element__counter"></div>
+      <div class="element__like-counter">
+        <button type="button" class="element__like" aria-label="Лайк"></button>
+        <span class="element__counter"></span>
+      </div>
     </article>
   </template>
 
