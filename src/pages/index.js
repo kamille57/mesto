@@ -122,13 +122,14 @@ const popupWithFormEdit = new PopupWithForm('.popup_type_profile-edit', (data) =
   popupWithFormEdit.renderLoading(true);
   api.updateUserInfo(data)
     .then((res) => {
-      console.log(res);
-      userInfo.setUserInfo(res); // response содержит данные, полученные с сервера 
-      popupWithFormEdit.renderLoading(false);
+      userInfo.setUserInfo(res); // res данные, полученные с сервера
       popupWithFormEdit.close();
     })
     .catch((error) => {
       console.log(error);
+    })
+    .finally(() => {
+      popupWithFormEdit.renderLoading(false);
     });
 });
 
@@ -141,28 +142,33 @@ const popupWithFormAdd = new PopupWithForm('.popup_type_add-pic', (data) => {
     .then((res) => {
       const cardElement = createCard(res, userId); // использование ответа сервера для создания карточки
       cardsList.addItem(cardElement);
-      popupWithFormAdd.renderLoading(false);
       popupWithFormAdd.close(); // Закрытие попапа при успешном ответе сервера
     })
     .catch((error) => {
       console.log(error); // Обработка ошибки
+    })
+    .finally(() => {
+      popupWithFormAdd.renderLoading(false);
     });
 });
+
 popupWithFormAdd.setEventListeners();
 
+const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => { 
+  popupWithFormAvatar.renderLoading(true); 
+  api.updateUserAvatar(data) 
+    .then((res) => { 
+      userInfo.setUserAvatar(res.avatar); 
+      popupWithFormAvatar.close(); 
+    }) 
+    .catch((error) => { 
+      console.error('Ошибка при обновлении аватара:', error); 
+    }) 
+    .finally(() => {
+      popupWithFormAvatar.renderLoading(false); 
+    }); 
+}); 
 
-const popupWithFormAvatar = new PopupWithForm('.popup_type_update-avatar', (data) => {
-  popupWithFormAvatar.renderLoading(true);
-  api.updateUserAvatar(data)
-    .then((res) => {
-      userInfo.setUserAvatar(res.avatar);
-      popupWithFormAvatar.renderLoading(false);
-      popupWithFormAvatar.close();
-    })
-    .catch((error) => {
-      console.error('Ошибка при обновлении аватара:', error);
-    });
-});
 popupWithFormAvatar.setEventListeners();
 
 addImageOpen.addEventListener('click', function (evt) {
@@ -175,7 +181,7 @@ buttonAvatarOpen.addEventListener('click', () => {
   const avatar = userInfo.getUserAvatar();
   formValidatorAvatar.resetFormValidation();
   popupWithFormAvatar.open();
-  popupAvatar.value = avatar; // Установите ссылку на аватар в поле ввода
+  popupAvatar.value = avatar; // Установить ссылку на аватар в поле ввода
 });
 
 buttonPopupOpen.addEventListener('click', () => {
